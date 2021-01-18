@@ -1,0 +1,193 @@
+/*Main Nav Bar Styles*/
+
+div.container
+{
+    width: 100%;
+}
+
+nav#nav
+{
+    width: 100%;
+    margin: 0 auto 2% auto;
+}
+
+img#logo
+{
+    height: 75px;
+}
+
+/* Body Styles */
+body
+{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Label and Input Styles */
+div#zipLabel
+{
+    margin: 0;
+}
+
+div#guestInfo_filter input, div#needInfo_filter input, div#incomeInfo_filter input, div#addressInfo_filter input, div#houseInfo_filter input
+{
+    display: block;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #495057;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+div#guestInfo_filter label, div#needInfo_filter label, div#incomeInfo_filter label, div#addressInfo_filter label, div#houseInfo_filter label
+{
+    font-size: 1.1rem;
+    text-align: left;
+    text-indent: 10px;
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+/* Data table styles */
+#hideTable
+{
+    display: none;
+}
+
+
+div#info
+{
+    display: block;
+    padding-bottom: 2%;
+}
+
+div#needs, div#address, div#household, div#income
+{
+    display: none;
+    padding-bottom: 2%;
+}
+
+/* change to pointer on hover row */
+.clickableRow td:hover {
+    cursor: pointer;
+}
+
+
+/* View Form button */
+
+a.clickForm
+{
+    background: #39a5ed;
+    background-image: -webkit-linear-gradient(top, #39a5ed, #2675a6);
+    background-image: -moz-linear-gradient(top, #39a5ed, #2675a6);
+    background-image: -ms-linear-gradient(top, #39a5ed, #2675a6);
+    background-image: -o-linear-gradient(top, #39a5ed, #2675a6);
+    background-image: linear-gradient(to bottom, #39a5ed, #2675a6);
+    border: none;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    color: #ffffff;
+    padding: 6px 10px;
+    text-decoration: none;
+}
+
+a.clickForm:hover
+{
+    background: #3db5ff;
+    background-image: -webkit-linear-gradient(top, #3db5ff, #3498db);
+    background-image: -moz-linear-gradient(top, #3db5ff, #3498db);
+    background-image: -ms-linear-gradient(top, #3db5ff, #3498db);
+    background-image: -o-linear-gradient(top, #3db5ff, #3498db);
+    background-image: linear-gradient(to bottom, #3db5ff, #3498db);
+    text-decoration: none;
+}
+
+/* Delete Form */
+button.delete
+{
+    margin-left: 8px;
+    background: #ed2b16;
+    background-image: -webkit-linear-gradient(top, #ed2b16, #c40100);
+    background-image: -moz-linear-gradient(top, #ed2b16, #c40100);
+    background-image: -ms-linear-gradient(top, #ed2b16, #c40100);
+    background-image: -o-linear-gradient(top, #ed2b16, #c40100);
+    background-image: linear-gradient(to bottom, #ed2b16, #c40100);
+    border: none;
+    -webkit-border-radius: 12;
+    -moz-border-radius: 12;
+    border-radius: 12px;
+    color: #ffffff;
+    padding: 6px 10px;
+    text-decoration: none;
+}
+
+button#delete:hover
+{
+    background: #ff4b2f;
+    background-image: -webkit-linear-gradient(top, #ff4b2f, #ed2b16);
+    background-image: -moz-linear-gradient(top, #ff4b2f, #ed2b16);
+    background-image: -ms-linear-gradient(top, #ff4b2f, #ed2b16);
+    background-image: -o-linear-gradient(top, #ff4b2f, #ed2b16);
+    background-image: linear-gradient(to bottom, #ff4b2f, #ed2b16);
+    text-decoration: none;
+}
+
+/* Submit Button */
+input#submit
+{
+    background: #39a5ed;
+    background-image: -webkit-linear-gradient(top, #39a5ed, #2675a6);
+    background-image: -moz-linear-gradient(top, #39a5ed, #2675a6);
+    background-image: -ms-linear-gradient(top, #39a5ed, #2675a6);
+    background-image: -o-linear-gradient(top, #39a5ed, #2675a6);
+    background-image: linear-gradient(to bottom, #39a5ed, #2675a6);
+    border: none;
+    -webkit-border-radius: 12;
+    -moz-border-radius: 12;
+    border-radius: 12px;
+    color: #ffffff;
+    padding: 6px 10px;
+    text-decoration: none;
+}
+
+input#submit:hover
+{
+    background: #3db5ff;
+    background-image: -webkit-linear-gradient(top, #3db5ff, #3498db);
+    background-image: -moz-linear-gradient(top, #3db5ff, #3498db);
+    background-image: -ms-linear-gradient(top, #3db5ff, #3498db);
+    background-image: -o-linear-gradient(top, #3db5ff, #3498db);
+    background-image: linear-gradient(to bottom, #3db5ff, #3498db);
+    text-decoration: none;
+}
+
+p#changed
+{
+    z-index: 8;
+    margin: 2%;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 1.8em;
+    color: green;
+}
+
+p.text-warning
+{
+    font-weight: bold;
+    font-size: 1.2em;
+    position: absolute;
+    left: 3%;
+}
+
+#username {
+    margin-left: 1em;
+}

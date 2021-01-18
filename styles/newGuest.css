@@ -1,0 +1,180 @@
+	/* Team AZAP
+	 * Alex, Zach, Antonio, Pavel
+	 * http://azap.greenrivertech.net/index.php */
+	
+/* Form Styles */
+
+form
+{
+	margin-bottom: 3%;
+}
+
+/* Fieldset styles */
+
+fieldset
+{
+	padding: 1.5%;
+	border: 2px solid #D9D9D9;
+	border-radius: 25px 0px 25px 0px;
+	-webkit-border-radius: 25px 0px 25px 0px;
+	-moz-border-radius: 25px 0px 25px 0px;
+}
+
+fieldset legend
+{
+	padding: 4px;
+	margin-left: 2%;
+	width: auto;
+}
+
+textarea
+{
+	resize: none;
+}
+
+div#household
+{
+	display: block;
+}
+
+div#house2, div#house3, div#house4, div#house5, div#house6, div#house7, div#house8, div#house9, div#house10
+{
+	display: none;
+}
+
+/* Dropdown Styles */
+
+select#update
+{
+	margin-left: 10px;
+    padding: .35rem .75rem;
+    font-size: 1rem;
+    line-height: 1.1;
+    color: #495057;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+/* Buttons */
+
+input#submit, button#submitForm
+{
+	background: #39a5ed;
+	background-image: -webkit-linear-gradient(top, #39a5ed, #2675a6);
+	background-image: -moz-linear-gradient(top, #39a5ed, #2675a6);
+	background-image: -ms-linear-gradient(top, #39a5ed, #2675a6);
+	background-image: -o-linear-gradient(top, #39a5ed, #2675a6);
+	background-image: linear-gradient(to bottom, #39a5ed, #2675a6);
+	border: none;
+	-webkit-border-radius: 12;
+	-moz-border-radius: 12;
+	border-radius: 12px;
+	color: #ffffff;
+	padding: 6px 10px;
+	text-decoration: none;
+}
+
+input#submit:hover, button#submitForm:hover
+{
+	background: #3db5ff;
+	background-image: -webkit-linear-gradient(top, #3db5ff, #3498db);
+	background-image: -moz-linear-gradient(top, #3db5ff, #3498db);
+	background-image: -ms-linear-gradient(top, #3db5ff, #3498db);
+	background-image: -o-linear-gradient(top, #3db5ff, #3498db);
+	background-image: linear-gradient(to bottom, #3db5ff, #3498db);
+	text-decoration: none;
+}
+
+input#preview, button#close
+{
+	background: #EAEAEA;
+	background-image: -webkit-linear-gradient(top, #EAEAEA, #A5A5A5);
+	background-image: -moz-linear-gradient(top, #EAEAEA, #A5A5A5);
+	background-image: -ms-linear-gradient(top, #EAEAEA, #A5A5A5);
+	background-image: -o-linear-gradient(top, #EAEAEA, #A5A5A5);
+	background-image: linear-gradient(to bottom, #EAEAEA, #A5A5A5);
+	border: none;
+	-webkit-border-radius: 12;
+	-moz-border-radius: 12;
+	border-radius: 12px;
+	color: black;
+	padding: 6px 10px;
+	text-decoration: none;
+}
+
+input#preview:hover, button#close:hover
+{
+	background: #F7F7F7;
+	background-image: -webkit-linear-gradient(top, #F7F7F7, #EAEAEA);
+	background-image: -moz-linear-gradient(top, #F7F7F7, #EAEAEA);
+	background-image: -ms-linear-gradient(top, #F7F7F7, #EAEAEA);
+	background-image: -o-linear-gradient(top, #F7F7F7, #EAEAEA);
+	background-image: linear-gradient(to bottom, #F7F7F7, #EAEAEA);
+	text-decoration: none;
+}
+
+a.deleteForm
+{
+	background: #D50B00;
+	background-image: -webkit-linear-gradient(top, #D50B00, #BA0B00);
+	background-image: -moz-linear-gradient(top, #D50B00, #BA0B00);
+	background-image: -ms-linear-gradient(top, #D50B00, #BA0B00);
+	background-image: -o-linear-gradient(top, #D50B00, #BA0B00);
+	background-image: linear-gradient(to bottom, #D50B00, #BA0B00);
+	border: none;
+	-webkit-border-radius: 12;
+	-moz-border-radius: 12;
+	border-radius: 12px;
+	color: #ffffff;
+	padding: 6px 10px;
+	text-decoration: none;
+}
+
+a.deleteForm:hover
+{
+	background: #FF554C;
+	background-image: -webkit-linear-gradient(top, #FF554C, #D50B00);
+	background-image: -moz-linear-gradient(top, #FF554C, #D50B00);
+	background-image: -ms-linear-gradient(top, #FF554C, #D50B00);
+	background-image: -o-linear-gradient(top, #FF554C, #D50B00);
+	background-image: linear-gradient(to bottom, #FF554C, #D50B00);
+	text-decoration: none;
+}
+
+p#success
+{
+	z-index: 8;
+	margin: 2%;
+	display: block;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	font-size: 1.8em;
+	color: green;
+}
+
+/* Modal window styles */
+
+div.modal-content
+{
+	position: absolute;
+	width: 180%;
+	right: -40%;
+}
+.btn-member-delete {
+	margin-left: 20px;
+	margin-top: 30px;
+	width: 100px;
+	height: 40px;
+}
+
+.btn-voucher-delete {
+	margin-left: 20px;
+	margin-top: 30px;
+	width: 100px;
+	height: 40px;
+}

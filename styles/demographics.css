@@ -1,0 +1,14 @@
+	/* Team AZAP
+	 * Alex, Zach, Antonio, Pavel
+	 * http://azap.greenrivertech.net/index.php */
+	
+/* Pie chart styles */
+svg defs + rect + g text /* Labels */
+{
+	font-size: 20px;
+}
+
+svg > g > g:last-child /* Stops cursor flickering */
+{
+	pointer-events: none;
+}
