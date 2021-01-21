@@ -1,17 +1,21 @@
 {
-  "name":"ashornal/StJamesOutreach",
+  "name":"lscott/StJamesOutreach",
   "authors":[
     {
-      "name":"Alex Shornal",
-      "email":"ashornal2@mail.greenriver.edu"
+      "name": "Lewis Scott",
+      "email": "lscott19@mail.greenriver.edu"
     },
     {
-      "name":"Pavel Vashchuk",
-      "email":"pvashchuk@mail.greenriver.edu"
+      "name": "David Haas",
+      "email": "Dhaas3@mail.greenriver.edu"
     },
     {
-      "name":"Antonio Suarez",
-      "email":"asuarez2@mail.greenriver.edu"
+      "name": "Arshdeep Singh",
+      "email": "Asingh69@mail.greenriver.edu"
+    },
+    {
+      "name": "Taras Gorbachevskiy",
+      "email": "Gorbataras@gmail.com"
     }
   ],
   "require":{

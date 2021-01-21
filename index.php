@@ -14,7 +14,7 @@ error_reporting(E_ALL);
 //Create an instance of the Base Class
 $f3 = Base::instance();
 $f3->set('ethnicities', array('caucasian', 'african', 'african american', 'hispanic', 'native', 'asian', 'pacific', 'eskimo','mixed','other' ));
-$f3->set('listResources', array('thriftshop','gas','water','energybill','food','dol','other'));
+$f3->set('listResources', array('thriftshop','gas','water','energybill','food','dol', 'rent', 'other'));
 $f3->set('listGenders', array('male','female','other'));
 
 //logout route
@@ -32,6 +32,7 @@ $f3->route('GET|POST /', function($f3) {
     {
         $username = $_POST['username'];
         $password = $_POST['password'];
+        echo $username; echo $password;
         //checks the database if the credentials are correct
         $user = $database->getUser($username,$password);
         //returns 1 if correct, and nothing if incorrect
@@ -164,7 +165,6 @@ $f3->route('GET|POST /newGuest', function($f3)
     $f3->set('dateToday',$dateToday);
 
     if(isset($_POST['submit'])){
-
         //setting variables
         $firstName = $_POST['first'];
         $lastName = $_POST['last'];
@@ -227,6 +227,7 @@ $f3->route('GET|POST /newGuest', function($f3)
         $f3->set('pse', $pse);
         $f3->set('water', $water);
         $f3->set('notes', $notes);
+
 
         $mainVouch = array();
         for($i = 0; $i < sizeof($voucher);$i++){
@@ -293,7 +294,6 @@ $f3->route('GET|POST /newGuest', function($f3)
 
         if($isValid){
             $f3->set('formIsSubmited','true');
-
             //replace values for easier access later
             if($income == null){
                 $income = 0;
@@ -325,7 +325,6 @@ $f3->route('GET|POST /newGuest', function($f3)
 
             //setter for the guest object
             $guest = new Guest($firstName,$lastName,$birthdate);
-
             // strip phone back to all numberic for db
             $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
 
@@ -377,7 +376,7 @@ $f3->route('GET|POST /newGuest', function($f3)
                     $database->insertHousehold($mainMem[$i][0], $mainMem[$i][1], $mainMem[$i][2]);
                 }
             }
-            $f3->reroute('/home');
+            //$f3->reroute('/home');
         }
     }
     $template = new Template();

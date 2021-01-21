@@ -35,7 +35,8 @@ This website is to let the user know that they submitted the form and emails the
 </nav>
 <!-- NAVBAR END -->
 <?php
-require("/home/stjamesk/dotcom/creds/creds.php");
+require_once '/home2/lscottgr/db.php';
+//require("/home/stjamesk/dotcom/creds/creds.php");
 require("includes/formFunctions.php");
 
 $target_file = "";
@@ -192,33 +193,45 @@ if ($other !== "") {
 } else {
     $assistanceMore = $assistance;
 }
-
+echo $fname;
 /// Prevent SQL injection
-$fname = mysqli_real_escape_string($conn, $fname);
-$lname = mysqli_real_escape_string($conn, $lname);
-$phone = mysqli_real_escape_string($conn, $phone);
-$addressOne = mysqli_real_escape_string($conn, $addressOne);
-$addressTwo = mysqli_real_escape_string($conn, $addressTwo);
-$city = mysqli_real_escape_string($conn, $city);
-$zip = mysqli_real_escape_string($conn, $zip);
-$assistanceMore = mysqli_real_escape_string($conn, $assistanceMore);
-$comment = mysqli_real_escape_string($conn, $comment);
+$fname = mysqli_real_escape_string($cnxn, $fname);
+$lname = mysqli_real_escape_string($cnxn, $lname);
+$phone = mysqli_real_escape_string($cnxn, $phone);
+$addressOne = mysqli_real_escape_string($cnxn, $addressOne);
+$addressTwo = mysqli_real_escape_string($cnxn, $addressTwo);
+$city = mysqli_real_escape_string($cnxn, $city);
+$zip = mysqli_real_escape_string($cnxn, $zip);
+$assistanceMore = mysqli_real_escape_string($cnxn, $assistanceMore);
+$comment = mysqli_real_escape_string($cnxn, $comment);
+
 
 // Send data to database
 $sql = "INSERT INTO outreach_form 
-                (`id`, `FirstName`, `LastName`, `Phone`, `Email`, `Address`, `AddressTwo`, 
+                (`completed`, `FirstName`, `LastName`, `Phone`, `Email`, `Address`, `AddressTwo`, 
                 `City`, `Zip`, `HelpList`, `Comments`, `Attachments`) 
-                VALUES (NULL, '$fname', '$lname', '$phone', 
+                VALUES (0, '$fname', '$lname', '$phone', 
                 '$email', '$addressOne', '$addressTwo', '$city', '$zip', '$assistanceMore', '$comment', '$target_file');";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
 
+echo $sql;
+echo $addressTwo;
 // Test if query was successful
-$success = mysqli_query($conn, $sql);
+$success = mysqli_query($cnxn, $sql);
+echo $success;
 if (!$success) {
     echo "<br><h4 class='text-center'>Something went wrong...</h4>";
 }
 
 // Format data to be more easily read
-$to = "bchadwick@mail.greenriver.edu";
+//$to = "bchadwick@mail.greenriver.edu";
+$to = "lscott19@mail.greenriver.edu";
+
 $subject = "Form completed";
 $message = "Form completed by: $fname $lname \r\n";
 $message .= "Phone: $phone\n";

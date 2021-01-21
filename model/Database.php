@@ -63,6 +63,9 @@ PRIMARY KEY (`NeedsId`),
 ;
  */
 require_once $_SERVER['DOCUMENT_ROOT']."/../config.php";
+//echo DB_DSN;
+//echo DB_USERNAME;
+//echo DB_PASSWORD;
 /**
  * Class Database, preforms sql statements to insert/delete/update/view
  */
@@ -116,11 +119,8 @@ class Database
         //1. Define the query
         $sql= "INSERT INTO Guests (first, last, birthdate, phone, email, ethnicity, street, city, zip, license, pse, water, income, rent, foodStamp, addSupport, mental, physical, senior, veteran, homeless, notes)
 						VALUES (:first, :last,:birthdate, :phone, :email, :ethnicity, :street, :city, :zip, :license, :pse, :water, :income, :rent, :foodStamp, :addSupport, :mental, :physical, :senior, :veteran, :homeless, :notes)";
-
-        /*
         echo $sql."<br>";
         echo "$first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license, $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $veteran, $homeless, $notes";
-        */
 
         //2. Prepare the statement
         $statement = $this->dbh->prepare($sql);
