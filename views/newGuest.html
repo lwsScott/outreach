@@ -427,7 +427,7 @@
                                                 <option value="">-- select one --</option>
 
                                                 <repeat group="{{@listResources}}" value="{{@thisResource}}">
-                                                    <option <check if="{{ @thisResource == @voucher[4] }}">selected</check>  value="{{ @thisResource }}" > {{ @thisResource }}</option>
+                                                    <option value="{{ @thisResource }}" > {{ @thisResource }}<check if="{{ @thisResource == @vouchers[4] }}">selected</check>  </option>
                                                 </repeat>
                                             </select>
 
@@ -469,12 +469,12 @@
                                 <label class='d-block'></label>
 
                                 <select class="form-control dropdown" name="resource[]">
-                                                <option value="">-- select one --</option>
+                                    <option value="">-- select one --</option>
 
-                                                <repeat group="{{@listResources}}" value="{{@thisResource}}">
-                                                    <option value="{{ @thisResource }}" > {{ @thisResource }}</option>
-                                                </repeat>
-                                            </select>
+                                    <repeat group="{{ @listResources }}" value="{{ @thisResource }}">
+                                        <option value="{{ @thisResource }}" >{{ @thisResource }}</option>
+                                    </repeat>
+                                </select>
 
                             </div>
                             <div class="form-group col">
