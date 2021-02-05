@@ -8,12 +8,12 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
-    <link type="text/css" rel="stylesheet" href="styles/home.css">
-    <link type="text/css" rel="stylesheet" href="styles/newGuest.css">
+    <link type="text/css" rel="stylesheet" href="{{@BASE}}/styles/home.css">
+    <link type="text/css" rel="stylesheet" href="{{@BASE}}/styles/newGuest.css">
     <title>New Guest</title>
 </head>
 <body>
-    <include href="views/header.html"/>
+    <include href="/views/header.html"/>
 
 
     <div class="container">
@@ -427,7 +427,7 @@
                                                 <option value="">-- select one --</option>
 
                                                 <repeat group="{{@listResources}}" value="{{@thisResource}}">
-                                                    <option value="{{ @thisResource }}" > {{ @thisResource }}<check if="{{ @thisResource == @vouchers[4] }}">selected</check>  </option>
+                                                    <option <check if="{{ @thisResource == @voucher[4] }}">selected</check>  value="{{ @thisResource }}" > {{ @thisResource }}</option>
                                                 </repeat>
                                             </select>
 
@@ -471,8 +471,8 @@
                                 <select class="form-control dropdown" name="resource[]">
                                     <option value="">-- select one --</option>
 
-                                    <repeat group="{{ @listResources }}" value="{{ @thisResource }}">
-                                        <option value="{{ @thisResource }}" >{{ @thisResource }}</option>
+                                    <repeat group="{{@listResources}}" value="{{@thisResource}}">
+                                        <option value="{{ @thisResource }}" > {{ @thisResource }}</option>
                                     </repeat>
                                 </select>
 
@@ -509,7 +509,7 @@
     </div>
     <!-- Bootstrap and jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="./js/newGuest.js"></script>
+    <script src="{{@BASE}}/js/newGuest.js"></script>
 
 <!--    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -575,13 +575,14 @@
                     '<option value="energybill">energybill</option> \n' +
                     '<option value="food">food</option> \n' +
                     '<option value="dol">dol</option> \n' +
+                    '<option value="rent">rent</option> \n' +
                     '<option value="other">other</option> \n' +
-                '</select> \n' +
-            '</div>  \n' +
-            '<div class="form-group col">' +
-                '<button class="btn btn-danger btn-voucher-delete" type="button">Delete</button>' +
-            '</div> \n' +
-        '</div>';
+                        '</select> \n' +
+                    '</div>  \n' +
+                    '<div class="form-group col">' +
+                        '<button class="btn btn-danger btn-voucher-delete" type="button">Delete</button>' +
+                    '</div> \n' +
+                '</div>';
 
             console.log(CLONE_HTML);
             $('#voucher-div').append(CLONE_HTML);
