@@ -63,6 +63,8 @@ PRIMARY KEY (`NeedsId`),
 ;
  */
 require_once $_SERVER['DOCUMENT_ROOT']."/../config.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/../db.php";
+
 //echo DB_DSN;
 //echo DB_USERNAME;
 //echo DB_PASSWORD;
@@ -169,6 +171,22 @@ class Database
         // Process the result
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * getter for all the requests in the outreach_form database table
+     * @return array of requests
+     */
+    function getRequests()
+    {
+        // Define the query
+        $sql = "SELECT * FROM outreach_form ";
+        // Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        // Execute the statement
+        $statement->execute();
+        // Process the result
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
     /**
      * getter for all the needs in the database
      * @return array of needs
@@ -193,6 +211,23 @@ class Database
     {
         // Define the query
         $sql = "SELECT * FROM Guests WHERE ClientID = $id";
+        // Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        // Execute the statement
+        $statement->execute();
+        // Process the result
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * getter for a single guest to edit
+     * @param $id, the guest id
+     * @return array row, values of the guest
+     */
+    function getRequestDetails($id)
+    {
+        // Define the query
+        $sql = "SELECT * FROM outreach_form WHERE id = $id";
         // Prepare the statement
         $statement = $this->dbh->prepare($sql);
         // Execute the statement
