@@ -21,6 +21,5 @@
     RewriteRule ^model/ = [F,L]
     RewriteRule ^includes/ = [F,L]
     RewriteRule ^classes/ = [F,L]
-    RewriteRule ^intake/ = [F,L]
 
 </IfModule>
