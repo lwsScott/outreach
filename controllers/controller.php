@@ -276,45 +276,6 @@ class Controller
             include('model/validation.php');
             $isValid = true;
 
-            //validate first Name
-            if(!validName($firstName)){
-                $f3->set('invalidFirstName', "invalid");
-                $isValid  = false;
-            }
-            //validate last name
-            if (!validName($lastName)) {
-                $f3->set('invalidLastName', "invalid");
-                $isValid = false;
-            }
-            //validate phone number
-            if(!validPhone($phone)){
-                $f3->set('invalidPhone', "invalid");
-                $isValid = false;
-            }
-            //validate zipcode
-            if(!validZip($zip)){
-                $f3->set('invalidZip', "invalid");
-                $isValid = false;
-            }
-            //validate monthly income
-            if(!validIncome($income)){
-                $f3->set('invalidIncome', "invalid");
-                $isValid = false;
-            }
-            //validate monthly rent
-            if(!validRent($rent)) {
-                $f3->set('invalidRent', "invalid");
-            }
-            //validate foodstamps
-            if(!validfoodstamps($foodStamp)){
-                $f3->set('invalidFoodstamps', "invalid");
-                $isValid = false;
-            }
-            //validate addsupport
-            if(!validAddSupport($addSupport)){
-                $f3->set('invalidAddSupport', "invalid");
-                $isValid = false;
-            }
 
             if($isValid){
                 $f3->set('formIsSubmited','true');
@@ -566,46 +527,7 @@ class Controller
             include('model/validation.php');
 
             $isValid = true;
-            //validate first Name
-            if (!validName($firstName)) {
-                $f3->set('invalidFirstName', "invalid");
-                $isValid = false;
-            }
-            //validate last name
-            if (!validName($lastName)) {
-                $f3->set('invalidLastName', "invalid");
-                $isValid = false;
-            }
-            //validate phone number
-            if (!validPhone($phone)) {
-                $f3->set('invalidPhone', "invalid");
-                $isValid = false;
-            }
-            //validate zipcode
-            if (!validZip($zip)) {
-                $f3->set('invalidZip', "invalid");
-                $isValid = false;
-            }
-            //validate monthly income
-            if (!validIncome($income)) {
-                $f3->set('invalidIncome', "invalid");
-                $isValid = false;
-            }
-            //validate monthly rent
-            if (!validRent($rent)) {
-                $f3->set('invalidRent', "invalid");
-                $isValid = false;
-            }
-            //validate foodstamps
-            if (!validfoodstamps($foodStamp)) {
-                $f3->set('invalidFoodstamps', "invalid");
-                $isValid = false;
-            }
-            //validate addsupport
-            if (!validAddSupport($addSupport)) {
-                $f3->set('invalidAddSupport', "invalid");
-                $isValid = false;
-            }
+
             if ($isValid) {
                 $f3->set('formIsSubmited','true');
                 if($homeless == null){
@@ -829,46 +751,7 @@ class Controller
             include('model/validation.php');
 
             $isValid = true;
-            //validate first Name
-            if (!validName($firstName)) {
-                $f3->set('invalidFirstName', "invalid");
-                $isValid = false;
-            }
-            //validate last name
-            if (!validName($lastName)) {
-                $f3->set('invalidLastName', "invalid");
-                $isValid = false;
-            }
-            //validate phone number
-            if (!validPhone($phone)) {
-                $f3->set('invalidPhone', "invalid");
-                $isValid = false;
-            }
-            //validate zipcode
-            if (!validZip($zip)) {
-                $f3->set('invalidZip', "invalid");
-                $isValid = false;
-            }
-            //validate monthly income
-            if (!validIncome($income)) {
-                $f3->set('invalidIncome', "invalid");
-                $isValid = false;
-            }
-            //validate monthly rent
-            if (!validRent($rent)) {
-                $f3->set('invalidRent', "invalid");
-                $isValid = false;
-            }
-            //validate foodstamps
-            if (!validfoodstamps($foodStamp)) {
-                $f3->set('invalidFoodstamps', "invalid");
-                $isValid = false;
-            }
-            //validate addsupport
-            if (!validAddSupport($addSupport)) {
-                $f3->set('invalidAddSupport', "invalid");
-                $isValid = false;
-            }
+
             if ($isValid) {
                 $f3->set('formIsSubmited','true');
                 if($homeless == null){
@@ -924,6 +807,8 @@ class Controller
                     $guest->getFoodStamp(),$guest->getAdditionalSupport(),$guest->getMental(),$guest->getPhysical(), $guest->getSenior(),
                     $guest->getVeteran(),$guest->getHomeless(),$guest->getNotes());
 
+                $database->markAssistanceComplete($id);
+
                 $lastId = $database->getLastId();
                 $f3->set('lastId', $lastId);
 
@@ -940,8 +825,6 @@ class Controller
                 $f3->reroute('/home');
             }
         }
-        //$f3->reroute('/newGuest');
-
         $template = new Template();
         echo $template->render('views/newGuest.html');
     }

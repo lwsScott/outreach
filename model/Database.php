@@ -121,8 +121,6 @@ class Database
         //1. Define the query
         $sql= "INSERT INTO Guests (first, last, birthdate, phone, email, ethnicity, street, city, zip, license, pse, water, income, rent, foodStamp, addSupport, mental, physical, senior, veteran, homeless, notes)
 						VALUES (:first, :last,:birthdate, :phone, :email, :ethnicity, :street, :city, :zip, :license, :pse, :water, :income, :rent, :foodStamp, :addSupport, :mental, :physical, :senior, :veteran, :homeless, :notes)";
-        echo $sql."<br>";
-        echo "$first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license, $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $veteran, $homeless, $notes";
 
         //2. Prepare the statement
         $statement = $this->dbh->prepare($sql);
@@ -154,7 +152,7 @@ class Database
         //4. Execute the query
         $statement->execute();
         $this->setLastId($this->dbh->lastInsertId());
-        echo $this->dbh->lastInsertId();
+        //echo $this->dbh->lastInsertId();
     }
     /**
      * getter for all the guests in the database
@@ -228,6 +226,23 @@ class Database
     {
         // Define the query
         $sql = "SELECT * FROM outreach_form WHERE id = $id";
+        // Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        // Execute the statement
+        $statement->execute();
+        // Process the result
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * getter for a single guest to edit
+     * @param $id, the guest id
+     * @return array row, values of the guest
+     */
+    function markAssistanceComplete($id)
+    {
+        // Define the query
+        $sql= "UPDATE outreach_form SET completed=1 WHERE id=$id";
         // Prepare the statement
         $statement = $this->dbh->prepare($sql);
         // Execute the statement
@@ -667,12 +682,12 @@ class Database
     {
         // Define the query
         $sql = "select 'White' as Label, count(ethnicity) as Value from Guests 
-					where ethnicity= 'white' AND hidden != 'y'
+					where ethnicity= 'caucasian' AND hidden != 'y'
 					union (
 					select 'African' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'african' AND hidden != 'y')
 					union (
-					select 'Histpanic' as Label, count(ethnicity) as Value from Guests 
+					select 'Hispanic' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'hispanic' AND hidden != 'y')
 					union (
 					select 'Native' as Label, count(ethnicity) as Value from Guests 
