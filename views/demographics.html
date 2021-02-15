@@ -17,13 +17,13 @@
     <script type="text/javascript">
 
         var ethnicity = [];
+
         var total = [];
+
         <repeat group="{{@ethnicity}}" value="{{@each}}">
             ethnicity.push("{{@each["Label"]}}");
-            total.push({{@each["Value"]}});
+        total.push({{@each["Value"]}});
         </repeat>
-
-
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -33,17 +33,17 @@
 
             var data = google.visualization.arrayToDataTable([
                 ['Ethnicity', 'Number of guests'],
-                [ethnicity[0],total[0]],
-                [ethnicity[1],total[1]],
-                [ethnicity[2],total[2]],
-                [ethnicity[3],total[3]],
-                [ethnicity[4],total[4]],
-                [ethnicity[5],total[5]],
-                [ethnicity[6],total[6]],
-                [ethnicity[7],total[7]],
-                [ethnicity[8],total[8]]
+                [ethnicity[0], total[0]],
+                [ethnicity[1], total[1]],
+                [ethnicity[2], total[2]],
+                [ethnicity[3], total[3]],
+                [ethnicity[4], total[4]],
+                [ethnicity[5], total[5]],
+                [ethnicity[6], total[6]],
+                [ethnicity[7], total[7]],
+                [ethnicity[8], total[8]]
 
-                ]);
+            ]);
 
             // customize chart
             var options = {
@@ -56,6 +56,7 @@
             chart.draw(data, options);
         }
     </script>
+
     <!-- Gender -->
     <script type="text/javascript">
 
