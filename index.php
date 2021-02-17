@@ -18,7 +18,11 @@ $f3->set('ethnicities', getEthnicities());
 $f3->set('listResources', getResources());
 $f3->set('listGenders', getGenders());
 
-$controller = new Controller($f3);
+// construct a new validator
+$validator = new Validate();
+
+// create a new controller
+$controller = new Controller($f3, $validator);
 
 //logout route
 $f3->route('GET|POST /logout', function($f3) {

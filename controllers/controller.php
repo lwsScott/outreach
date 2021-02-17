@@ -10,17 +10,17 @@
 class Controller
 {
     private $_f3; //router
-    //private $_validator; //validation object
+    private $_validator; //validation object
 
     /**
      * Controller constructor.
      * @param $f3
      * @param $validator
      */
-    public function __construct($f3)
+    public function __construct($f3, $validator)
     {
         $this->_f3 = $f3;
-        //$this->_validator = $validator;
+        $this->_validator = $validator;
     }
 
     public function logout($f3)
@@ -276,6 +276,12 @@ class Controller
             include('model/validation.php');
             $isValid = true;
 
+            /*
+            if (!$this->_validator->validName($_POST['first'])) {
+                $isValid = false;
+                echo "false";
+            }
+            */
 
             if($isValid){
                 $f3->set('formIsSubmited','true');

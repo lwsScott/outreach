@@ -681,14 +681,20 @@ class Database
     function getEthnicity()
     {
         // Define the query
-        $sql = "select 'White' as Label, count(ethnicity) as Value from Guests 
+        $sql = "select 'Caucasian' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'caucasian' AND hidden != 'y'
 					union (
-					select 'African' as Label, count(ethnicity) as Value from Guests 
-					where ethnicity= 'african' AND hidden != 'y')
+					select 'African (Native)' as Label, count(ethnicity) as Value from Guests 
+					where ethnicity= 'african (native)' AND hidden != 'y')
+                    union (
+					select 'African American' as Label, count(ethnicity) as Value from Guests 
+					where ethnicity= 'african american' AND hidden != 'y')
 					union (
-					select 'Hispanic' as Label, count(ethnicity) as Value from Guests 
+					select 'LatinX' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'hispanic' AND hidden != 'y')
+                    union (
+					select 'LatinX' as Label, count(ethnicity) as Value from Guests 
+					where ethnicity= 'latinx' AND hidden != 'y')
 					union (
 					select 'Native' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'native' AND hidden != 'y')
