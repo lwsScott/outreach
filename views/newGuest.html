@@ -20,12 +20,16 @@
 
         <form action="#" method="post" id="formGuest">
             <h2>Outreach Contact Report</h2>
-            <p id="obligitory"><i>* obligatory fields</i></p>
+
+            <check if="@helpList">
+                <true><label class="text-danger">Help Requested: {{ @helpList }}</label></true>
+            </check>
+
             <fieldset class="form-group">
                 <legend>Guest's Information</legend>
                 <div class="row">
                     <div class="form-group col-8">
-                        <label class="form-control-label"><b>*Name:</b>
+                        <label class="form-control-label"><b>Name:</b>
                             <!-- check for valid fist and last name -->
                             <check if="{{ isset(@invalidFirstName) }}">
                                 <span class="text-danger font-weight-normal"> - Invalid first name</span>

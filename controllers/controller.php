@@ -642,6 +642,7 @@ class Controller
         $last = substr($dbPhone,-4);
         $guest['phone'] = "(" . $area . ") " . $first . "-" . $last;
 
+        $f3->set('helpList', $guest['HelpList']);
         $f3->set('firstName', $guest['FirstName']);
         $f3->set('lastName', $guest['LastName']);
         //$f3->set('birthdate', $guest['birthdate']);
