@@ -702,14 +702,20 @@ class Database
 					select 'Asian' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'asian' AND hidden != 'y')
 					union (
-					select 'Pacific' as Label, count(ethnicity) as Value from Guests 
+					select 'Pacific Islander' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'pacific' AND hidden != 'y')
+                    union (
+					select 'Pacific Islander' as Label, count(ethnicity) as Value from Guests 
+					where ethnicity= 'pacific islander' AND hidden != 'y')
 					union (
 					select 'Eskimo' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'eskimo'AND hidden != 'y' )
 					union (
 					select 'Mixed' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'mixed' AND hidden != 'y')
+					union (
+					select 'Not Provided' as Label, count(ethnicity) as Value from Guests 
+					where ethnicity= 'Prefer not to answer' AND hidden != 'y')
 					union (
 					select 'Other' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'other' AND hidden != 'y')";
@@ -734,8 +740,12 @@ class Database
 					union (
 					    select 'Female' as Label, count(gender) as Value from Household
 					    LEFT JOIN Guests ON Household.Guests_ClientId = Guests.ClientId
-                        where gender= 'female' AND hidden != 'y')
-					union (
+                        where gender= 'female' AND hidden != 'y')	
+                    union (
+					    select 'Not Provided' as Label, count(gender) as Value from Household
+					    LEFT JOIN Guests ON Household.Guests_ClientId = Guests.ClientId
+                        where gender= 'Prefer not to answer' AND hidden != 'y')
+                    union (
 					    select 'Other' as Label, count(gender) as Value from Household
 					    LEFT JOIN Guests ON Household.Guests_ClientId = Guests.ClientId
 					    where gender= 'other' AND hidden != 'y')";

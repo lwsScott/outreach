@@ -367,7 +367,7 @@ class Controller
                         $database->insertHousehold($mainMem[$i][0], $mainMem[$i][1], $mainMem[$i][2]);
                     }
                 }
-                //$f3->reroute('/home');
+                $f3->reroute('/home');
             }
         }
         $template = new Template();

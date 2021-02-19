@@ -21,7 +21,7 @@
         <form action="#" method="post" id="formGuest">
             <h2>Outreach Contact Report</h2>
 
-            <check if="@helpList">
+            <check if="{{ isset(@helpList) }}">
                 <true><label class="text-danger">Help Requested: {{ @helpList }}</label></true>
             </check>
 
