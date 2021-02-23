@@ -74,5 +74,12 @@ $f3->route('GET|POST /profile', function($f3) {
     $GLOBALS['controller']->profile($f3);
 });
 
+/*
+$f3->route('GET|POST /intake/form', function($f3) {
+    echo "here";
+    $GLOBALS['controller']->intake($f3);
+});
+*/
+
 //Run Fat-Free
 $f3->run();

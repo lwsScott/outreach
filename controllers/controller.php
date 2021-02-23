@@ -77,6 +77,15 @@ class Controller
         $template = new Template();
         echo $template->render('views/login.html');
     }
+/*
+    public function intake($f3)
+    {
+        //$database = new Database();
+        //if submitted login form
+        $template = new Template();
+        echo $template->render('intake/index.php');
+    }
+*/
 
     public function home($f3)
     {

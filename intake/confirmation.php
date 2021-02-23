@@ -40,7 +40,9 @@ require_once '/home2/lscottgr/db.php';
 require("includes/formFunctions.php");
 
 $target_file = "";
-if (!(empty($_FILES))) {
+//if (!(empty($_FILES))) {
+if ((isset($_FILES))) {
+
     echo '<pre>';
     // init image file path
     $target_dir = "uploads/";
@@ -49,7 +51,7 @@ if (!(empty($_FILES))) {
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
     // Check if image file is a actual image or fake image
-    if (isset($_POST["submit"])) {
+    if (isset($_POST["submit"]) && ($target_file != $target_dir)) {
         $check = getimagesize($_FILES["myfile"]["tmp_name"]);
         if ($check !== false) {
             echo "File is an image - " . $check["mime"] . ".";
@@ -58,39 +60,40 @@ if (!(empty($_FILES))) {
             echo "File is not an image.";
             $uploadOk = 0;
         }
-    }
+        //}
 
-    // Check if file already exists
-    if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
-        $uploadOk = 0;
-    }
-
-    // Check file size
-    if ($_FILES["myfile"]["size"] > 10000000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-
-    // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif") {
-        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($_FILES["myfile"]["tmp_name"], $target_file)) {
-            echo "The file " . htmlspecialchars(basename($_FILES["myfile"]["name"])) . " has been uploaded.";
-        } else {
-            echo "Sorry, there was an error uploading your file.";
+        // Check if file already exists
+        if (file_exists($target_file) && ($target_file != $target_dir)) {
+            echo "Sorry, file already exists.";
+            $uploadOk = 0;
         }
+
+        // Check file size
+        if ($_FILES["myfile"]["size"] > 10000000) {
+            echo "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif") {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+            // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["myfile"]["tmp_name"], $target_file)) {
+                echo "The file " . htmlspecialchars(basename($_FILES["myfile"]["name"])) . " has been uploaded.";
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
+        echo "</pre>";
     }
-    echo "</pre>";
 }
 $isValid = true;
 
@@ -193,7 +196,6 @@ if ($other !== "") {
 } else {
     $assistanceMore = $assistance;
 }
-echo $fname;
 /// Prevent SQL injection
 $fname = mysqli_real_escape_string($cnxn, $fname);
 $lname = mysqli_real_escape_string($cnxn, $lname);
@@ -212,18 +214,10 @@ $sql = "INSERT INTO outreach_form
                 `City`, `Zip`, `HelpList`, `Comments`, `Attachments`) 
                 VALUES (0, '$fname', '$lname', '$phone', 
                 '$email', '$addressOne', '$addressTwo', '$city', '$zip', '$assistanceMore', '$comment', '$target_file');";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
 
-echo $sql;
-echo $addressTwo;
 // Test if query was successful
 $success = mysqli_query($cnxn, $sql);
-echo $success;
+//echo $success;
 if (!$success) {
     echo "<br><h4 class='text-center'>Something went wrong...</h4>";
 }
