@@ -22,4 +22,6 @@
     RewriteRule ^includes/ = [F,L]
     RewriteRule ^classes/ = [F,L]
 
+
+
 </IfModule>
