@@ -88,50 +88,68 @@ include('includes/head.html');
                 </div>
             </div> <!-- Kent United Methodist Church End-->
 
-            <!-- DSHS -->
+            <!-- PSE -->
             <div class="row text-left">
                 <div class="card mb-5 col-md-8 mx-auto">
-                    <h3 class="card-header text-center">Washington State Department of Social and Health Services</h3>
+                    <h3 class="card-header text-center">Puget Sound Energy Bill Payment/Weatherization Assistance</h3>
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="images/dshs.png" class="card-img" alt="DSHS Logo">
+                            <img src="images/pse.png" class="card-img" alt="PSE Logo">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <p class="card-text">As a Department we are tied together by a single mission: to
-                                    transform lives. Each administration within DSHS has a refined focus on this
-                                    mission.
+                                <p class="card-text">We offer two programs for residential customers to help pay your
+                                    electric or natural gas bills. Eligibility is based on your household income and
+                                    the number of people that live in your home.
                                 </p>
-                                <a href="https://www.dshs.wa.gov/" target="_blank"
+                                <a href="https://www.pse.com/pages/bill-and-weatherization-assistance" target="_blank"
                                    class="btn btn-primary stretched-link pull-right mb-2">Visit</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> <!-- DSHS End -->
+            </div> <!-- PSE End -->
 
-            <!-- St. James -->
+            <!-- United Way -->
             <div class="row text-left">
                 <div class="card mb-5 col-md-8 mx-auto">
-                    <h3 class="card-header text-center">St. James Episcopal Church</h3>
+                    <h3 class="card-header text-center">United Way of King County</h3>
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="images/stjameslogo.png" class="card-img" alt="St. James Logo">
+                            <img src="images/uwkc-logo-blue.png" class="card-img" alt="United Way of King County Logo">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <p class="card-text">“Every person is welcome at God’s Table”—this is what we say every
-                                    Sunday morning, and we truly mean it. It guides our lives and our ministries here at
-                                    St. James, Kent. Whoever you are—whatever your story, your circumstances, your
-                                    hopes, and your gifts—you are truly and completely welcome with us.
+                                <p class="card-text">Get help with rent. Fill out a survey and you will be contacted
+                                    when funds are available to determine your eligibility.
                                 </p>
-                                <a href="https://stjameskent.org/" target="_blank"
+                                <a href="https://www.uwkc.org/renthelp/" target="_blank"
                                    class="btn btn-primary stretched-link pull-right mb-2">Visit</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> <!-- St.James End -->
+            </div> <!-- United Way End -->
+
+            <!-- Open Doors -->
+            <div class="row text-left">
+                <div class="card mb-5 col-md-8 mx-auto">
+                    <h3 class="card-header text-center">Open Doors for Multicultural Families</h3>
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="images/Open_Doors_Logo_2020.svg" class="card-img" alt="Open Doors Logo">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <p class="card-text">COVID-19 Resources.
+                                </p>
+                                <a href="https://www.multiculturalfamilies.org/resources/covid-19-resources/" target="_blank"
+                                   class="btn btn-primary stretched-link pull-right mb-2">Visit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Open Doors End -->
         </div>
     </div>
 
