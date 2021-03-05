@@ -82,6 +82,13 @@
                 <td>{{@data['SUM(amount)']}} </td>
             </tr>
         </repeat>
+        <repeat group="{{ @rent}}" value="{{ @data }}">
+            <tr>
+                <td>Rent</td>
+                <td>{{@data['COUNT(amount)']}} </td>
+                <td>{{@data['SUM(amount)']}} </td>
+            </tr>
+        </repeat>
         <repeat group="{{ @other}}" value="{{ @data }}">
             <tr>
                 <td>Other</td>

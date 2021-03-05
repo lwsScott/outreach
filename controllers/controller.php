@@ -178,6 +178,8 @@ class Controller
         $f3->set('food', $food);
         $dol = $database->getDol($start, $end);
         $f3->set('dol', $dol);
+        $other = $database->getRent($start, $end);
+        $f3->set('rent', $other);
         $other = $database->getOther($start, $end);
         $f3->set('other', $other);
         $total = $database->getTotal($start, $end);

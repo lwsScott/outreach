@@ -51,14 +51,14 @@ $('#add-voucher-button').click(function(event) {
         '<label class="d-block"></label> \n' +
         '<select class="form-control dropdown" name="resource[]">\n' +
         '<option value="">-- select one --</option> \n' +
-        '<option value="thriftshop">thriftshop</option> \n' +
-        '<option value="gas">gas</option> \n' +
-        '<option value="waterbill">waterbill</option> \n' +
-        '<option value="energybill">energybill</option> \n' +
-        '<option value="food">food</option> \n' +
-        '<option value="dol">dol</option> \n' +
-        '<option value="rent">rent</option> \n' +
-        '<option value="other">other</option> \n' +
+        '<option value="dol">Dol</option> \n' +
+        '<option value="energybill">Energy Bill</option> \n' +
+        '<option value="food">Food</option> \n' +
+        '<option value="gas">Gas</option> \n' +
+        '<option value="rent">Rent</option> \n' +
+        '<option value="thriftshop">Thrift Shop</option> \n' +
+        '<option value="waterbill">Water</option> \n' +
+        '<option value="other">Other</option> \n' +
         '</select> \n' +
         '</div>  \n' +
         '<div class="form-group col">' +
@@ -105,9 +105,10 @@ $('#add-member-button').click(function(event) {
         '<label class="d-block"></label> \n' +
         '<select class="form-control dropdown" name="gender[]"> \n' +
         '<option value="">select one</option> \n' +
-        '<option value="male">male</option>\n' +
-        '<option value="female">female</option> \n' +
-        '<option value="other">other</option>\n' +
+        '<option value="male">Male</option>\n' +
+        '<option value="female">Female</option> \n' +
+        '<option value="other">Other</option>\n' +
+        '<option value="Prefer not to answer">Prefer not to answer</option>\n' +
         '</select> \n' +
         '</div> \n' +
         '<button class="btn btn-danger btn-member-delete" type="button">Delete</button> \n' +

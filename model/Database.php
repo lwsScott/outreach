@@ -459,7 +459,7 @@ class Database
         $sql = "SELECT COUNT(amount), SUM(amount) FROM Needs
                         LEFT JOIN Guests ON Needs.Guests_ClientId = Guests.ClientId
                         WHERE visitDate BETWEEN '$start' AND '$end'
-                        AND resource = 'thrift' AND hidden != 'y'";
+                        AND resource = 'thriftshop' AND hidden != 'y'";
         // Prepare the statement
         $statement = $this->dbh->prepare($sql);
         // Execute the statement
@@ -582,10 +582,32 @@ class Database
     function getOther($start, $end)
     {
         // Define the query
-        $sql = "SELECT COUNT(amount), SUM(amount) FROM 
+        $sql = "SELECT COUNT(amount), SUM(amount) FROM Needs
                         LEFT JOIN Guests ON Needs.Guests_ClientId = Guests.ClientId
                         WHERE visitDate BETWEEN '$start' AND '$end'
                         AND resource = 'other' AND hidden != 'y'";
+        // Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        // Execute the statement
+        $statement->execute();
+        // Process the result
+        //echo"<pre>";var_dump($row);echo"</pre>";
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * getter for the other values
+     * @param $start
+     * @param $end
+     * @return array
+     */
+    function getRent($start, $end)
+    {
+        // Define the query
+        $sql = "SELECT COUNT(amount), SUM(amount) FROM Needs
+                        LEFT JOIN Guests ON Needs.Guests_ClientId = Guests.ClientId
+                        WHERE visitDate BETWEEN '$start' AND '$end'
+                        AND resource = 'rent' AND hidden != 'y'";
         // Prepare the statement
         $statement = $this->dbh->prepare($sql);
         // Execute the statement
