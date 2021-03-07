@@ -431,7 +431,7 @@
                                                 <option value="">-- select one --</option>
 
                                                 <repeat group="{{@listResources}}" value="{{@thisResource}}">
-                                                    <option <check if="{{ str_replace(' ', '', strtolower(@thisResource)) == strtolower(@voucher[4]) }}">selected</check>  value="{{ @thisResource }}" > {{ @thisResource }}</option>
+                                                    <option <check if="{{ str_replace(' ', '', strtolower(@thisResource)) == str_replace(' ', '', strtolower(@voucher[4])) }}">selected</check>  value="{{ @thisResource }}" > {{ @thisResource }}</option>
                                                 </repeat>
                                             </select>
 

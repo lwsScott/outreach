@@ -501,7 +501,7 @@ class Database
         $sql = "SELECT COUNT(amount), SUM(amount) FROM Needs
                         LEFT JOIN Guests ON Needs.Guests_ClientId = Guests.ClientId
                         WHERE visitDate BETWEEN '$start' AND '$end'
-                        AND resource = 'waterbill' AND hidden != 'y'";
+                        AND resource = 'water' AND hidden != 'y'";
         // Prepare the statement
         $statement = $this->dbh->prepare($sql);
         // Execute the statement
