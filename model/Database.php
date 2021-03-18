@@ -63,9 +63,18 @@ PRIMARY KEY (`NeedsId`),
 ;
  */
 require_once $_SERVER['DOCUMENT_ROOT']."/../config.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/../db.php";
-//require("/home/stjamesk/dotcom/creds/creds.php");
 
+//require("/home/stjamesk/dotcom/creds/creds.php");
+/*
+if ($_SERVER['USER'] == 'lscottgr')
+{
+    require_once $_SERVER['DOCUMENT_ROOT']."/../config.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/../db.php";
+}
+else {
+    require_once $_SERVER['DOCUMENT_ROOT']."/../config.php";
+}
+*/
 //echo DB_DSN;
 //echo DB_USERNAME;
 //echo DB_PASSWORD;

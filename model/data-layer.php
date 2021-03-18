@@ -31,3 +31,15 @@ function getGenders()
     $genders = array('Male','Female','Other','Prefer not to answer');
     return $genders;
 }
+
+/**getGuestParameters()
+ * returns an array of gender options to be used in form
+ * @return string[]
+ */
+function getGuestParameters()
+{
+    $parameters = array('firstName', 'lastName', 'birthdate', 'phone', 'email', 'ethnicity', 'street', 'city', 'zip',
+        'license', 'pse', 'water', 'income', 'rent', 'foodStamp', 'addSupport', 'mental', 'physical', 'senior',
+        'veteran', 'homeless', 'notes');
+    return $parameters;
+}
