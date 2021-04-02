@@ -240,8 +240,28 @@ class Controller
             $phone = "(" . $area . ") " . $first . "-" . $last;
 
             //set to hive
-            $this->setHiveVariables($f3, $firstName, $lastName, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $mental, $physical, $senior, $veteran, $homeless, $income, $rent, $foodStamp, $addSupport, $license, $pse, $water, $notes);
-
+            $f3->set('firstName', $firstName);
+            $f3->set('lastName', $lastName);
+            $f3->set('birthdate', $birthdate);
+            $f3->set('phone', $phone);
+            $f3->set('email', $email);
+            $f3->set('ethnicity', $ethnicity);
+            $f3->set('street', $street);
+            $f3->set('city', $city);
+            $f3->set('zip', $zip);
+            $f3->set('mental', $mental);
+            $f3->set('physical', $physical);
+            $f3->set('senior', $senior);
+            $f3->set('veteran', $veteran);
+            $f3->set('homeless', $homeless);
+            $f3->set('income', $income);
+            $f3->set('rent', $rent);
+            $f3->set('foodStamp', $foodStamp);
+            $f3->set('addSupport', $addSupport);
+            $f3->set('license', $license);
+            $f3->set('pse', $pse);
+            $f3->set('water', $water);
+            $f3->set('notes', $notes);
 
             $mainVouch = array();
             for($i = 0; $i < sizeof($voucher);$i++){
@@ -477,8 +497,28 @@ class Controller
             $last = substr($phone,-4);
             $phone = "(" . $area . ") " . $first . "-" . $last;
 
-            $this->setHiveVariables($f3, $firstName, $lastName, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $mental, $physical, $senior, $veteran, $homeless, $income, $rent, $foodStamp, $addSupport, $license, $pse, $water, $notes);
-
+            $f3->set('firstName', $firstName);
+            $f3->set('lastName', $lastName);
+            $f3->set('birthdate', $birthdate);
+            $f3->set('phone', $phone);
+            $f3->set('email', $email);
+            $f3->set('ethnicity', $ethnicity);
+            $f3->set('street', $street);
+            $f3->set('city', $city);
+            $f3->set('zip', $zip);
+            $f3->set('mental', $mental);
+            $f3->set('physical', $physical);
+            $f3->set('senior', $senior);
+            $f3->set('veteran', $veteran);
+            $f3->set('homeless', $homeless);
+            $f3->set('income', $income);
+            $f3->set('rent', $rent);
+            $f3->set('foodStamp', $foodStamp);
+            $f3->set('addSupport', $addSupport);
+            $f3->set('license', $license);
+            $f3->set('pse', $pse);
+            $f3->set('water', $water);
+            $f3->set('notes', $notes);
             $mainVouch = array();
             for($i = 0; $i < sizeof($voucher); $i++){
                 if(!empty($voucher[$i]) || !empty($resource[$i]) ) {
@@ -681,8 +721,28 @@ class Controller
             $last = substr($phone,-4);
             $phone = "(" . $area . ") " . $first . "-" . $last;
 
-            $this->setHiveVariables($f3, $firstName, $lastName, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $mental, $physical, $senior, $veteran, $homeless, $income, $rent, $foodStamp, $addSupport, $license, $pse, $water, $notes);
-
+            $f3->set('firstName', $firstName);
+            $f3->set('lastName', $lastName);
+            $f3->set('birthdate', $birthdate);
+            $f3->set('phone', $phone);
+            $f3->set('email', $email);
+            $f3->set('ethnicity', $ethnicity);
+            $f3->set('street', $street);
+            $f3->set('city', $city);
+            $f3->set('zip', $zip);
+            $f3->set('mental', $mental);
+            $f3->set('physical', $physical);
+            $f3->set('senior', $senior);
+            $f3->set('veteran', $veteran);
+            $f3->set('homeless', $homeless);
+            $f3->set('income', $income);
+            $f3->set('rent', $rent);
+            $f3->set('foodStamp', $foodStamp);
+            $f3->set('addSupport', $addSupport);
+            $f3->set('license', $license);
+            $f3->set('pse', $pse);
+            $f3->set('water', $water);
+            $f3->set('notes', $notes);
             $mainVouch = array();
             for($i = 0; $i < sizeof($voucher); $i++){
                 if(!empty($voucher[$i]) || !empty($resource[$i]) ) {
