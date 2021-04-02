@@ -24,7 +24,12 @@
             <check if="{{ isset(@helpList) }}">
                 <true><label class="text-danger">Help Requested: {{ @helpList }}</label></true>
             </check>
-
+            <fieldset class="form-group">
+                <legend>Eligibility</legend>
+                    <repeat group="{{@listResources}}" value="{{@resource}}">
+                        <label>{{@resource}}</label>
+                    </repeat>
+            </fieldset>
             <fieldset class="form-group">
                 <legend>Guest's Information</legend>
                 <div class="row">
