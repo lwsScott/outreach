@@ -405,6 +405,67 @@ class Controller
                 array_push($mainVouch,$temp);
             }
         }
+        $resources = getResources();
+        /*
+        function getEligibleDates($mainVouch)
+        {
+            for ($x = 0; $x < sizeof($mainVouch); $x++) {
+
+                if ($guestMap[$resource] === null) {
+                    $guestMap[$resource] = $mainVouch[$x][3];
+                } else {
+                    if ($guestMap[$resource] < $mainVouch[$x][3]) {
+                        $guestMap[$resource] = $mainVouch[$x][3];
+                    }
+                }
+            }
+        }
+            $guestMap = array_map('getEligibleDates', $resources);
+
+            $f3->set('guestMap', $guestMap);
+        */
+        for($x = 0; $x < sizeof($mainVouch);$x++) {
+
+            if (($mainVouch[$x][4]) == "thriftshop") {
+                $date = new DateTime($mainVouch[$x][3]);
+                $date->add(new DateInterval('P6M'));
+                $date = $date->format('m/d/Y');
+                $f3->set('ThriftShop', $date);
+
+            } elseif (($mainVouch[$x][4]) == "water") {
+                $date = new DateTime($mainVouch[$x][3]);
+                $date->add(new DateInterval('P1Y'));
+                $date = $date->format('m/d/Y');
+                $f3->set('Water', $date);
+
+            } elseif (($mainVouch[$x][4]) == "energybill") {
+                $date = new DateTime($mainVouch[$x][3]);
+                $date->add(new DateInterval('P1Y'));
+                $date = $date->format('m/d/Y');
+                $f3->set('EnergyBill', $date);
+
+            } elseif (($mainVouch[$x][4]) == "gas") {
+                $date = new DateTime($mainVouch[$x][3]);
+                $date->add(new DateInterval('P6M'));
+                $date = $date->format('m/d/Y');
+                $f3->set('Gas', $date);
+
+            } elseif (($mainVouch[$x][4]) == "rent") {
+                $date = new DateTime($mainVouch[$x][3]);
+                $date->add(new DateInterval('P1Y'));
+                $date = $date->format('m/d/Y');
+                $f3->set('Rent', $date);
+
+            } elseif (($mainVouch[$x][4]) == "food") {
+                $date = new DateTime($mainVouch[$x][3]);
+                $date->add(new DateInterval('P1M'));
+                $date = $date->format('m/d/Y');
+                $f3->set('Food', $date);
+            }
+
+
+        }
+
 
         //sort vouchers by date
         function compareOrder($a, $b)

@@ -43,3 +43,4 @@ function getGuestParameters()
         'veteran', 'homeless', 'notes');
     return $parameters;
 }
+
