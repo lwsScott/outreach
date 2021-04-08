@@ -26,12 +26,24 @@
             </check>
             <fieldset class="form-group">
                 <legend>Eligibility</legend>
-                    <label>Thrift Shop {{ @ThriftShop}}</label>
-                    <label>Water {{ @Water}}</label>
-                    <label>Energy Bill {{ @EnergyBill}}</label>
-                    <label>Gas {{ @Gas}}</label>
-                    <label>Rent {{ @Rent}}</label>
-                    <label>Food {{ @Food}}</label>
+                    <check if="{{ isset(@ThriftShop) }}">
+                        <label><strong>Thrift Shop:</strong>&nbsp;&nbsp;{{ @ThriftShop}}&nbsp;|&nbsp; </label>
+                    </check>
+                    <check if="{{ isset(@Water) }}">
+                        <label><strong>Water:</strong>&nbsp;&nbsp;{{ @Water}}&nbsp;|&nbsp; </label>
+                    </check>
+                    <check if="{{ isset(@EnergyBill) }}">
+                        <label><strong>Energy Bill:</strong>&nbsp;&nbsp;{{ @EnergyBill}}&nbsp;|&nbsp; </label>
+                    </check>
+                    <check if="{{ isset(@Gas) }}">
+                        <label><strong>Gas:</strong>&nbsp;&nbsp;{{ @Gas}}&nbsp;|&nbsp; </label>
+                    </check>
+                    <check if="{{ isset(@Rent) }}">
+                        <label><strong>Rent:</strong>&nbsp;&nbsp;{{ @Rent}}&nbsp;|&nbsp; </label>
+                    </check>
+                    <check if="{{ isset(@Food) }}">
+                        <label><strong>Food:</strong>&nbsp;&nbsp;{{ @Food}}&nbsp;|&nbsp; </label>
+                    </check>
             </fieldset>
             <fieldset class="form-group">
                 <legend>Guest's Information</legend>
