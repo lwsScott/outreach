@@ -69,25 +69,39 @@
 
     <div class="container" id="info">
         <h3 class="text-muted">Guest Info</h3>
-        <table id="guestInfo" class="display">
+        <table id="guestInfo" class="table display table-hover">
             <thead>
             <tr>
                 <th>ID</th>
+                <th>Flag</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Birthdate</th>
                 <th>Phone</th>
+                <th>View</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
             <repeat group="{{ @guests}}" value="{{ @guest }}">
                 <check if="{{ @guest['hidden'] != 'y' }}">
-                    <tr class="clickableRow" data-href="{{ @BASE }}/{{@guest['ClientId']}}">
+                    <tr  class="tableRow" data-href="{{ @BASE }}/{{@guest['ClientId']}}">
                         <td>{{@guest['ClientId']}}</td>
+                        <td><input class='completed' type='checkbox' id="complete{{@guest['flag']}}" <check if="{{ @guest['flag'] == 1 }}">checked></check></td>
                         <td>{{@guest['first']}} </td>
                         <td>{{@guest['last']}}</td>
                         <td data-sort="{{ strtotime(@guest['birthdate']) }}">{{@guest['birthdate']}}</td>
                         <td>{{@guest['phone']}}</td>
+                        <td>
+                            <!--<a href='includes/delete.php?recordId={{@request["id"]}}' class='btn btn-sm text-white mt-2'>Delete</a>-->
+                            <a href="{{ @BASE }}/{{@guest['ClientId']}}" class='btn btn-sm mt-2'>View</a>
+                        </td>
+                        <td>
+                            <!--<a href='includes/delete.php?recordId={{@request["id"]}}' class='btn btn-sm text-white mt-2'>Delete</a>-->
+                            <a onclick="return confirm('Are you sure?')"
+                               href='includes/delete.php?recordId={{@guest["ClientId"]}}'
+                               class='btn btn-sm mt-2'>Delete</a>
+                        </td>
                     </tr>
                 </check>
             </repeat>
@@ -95,10 +109,13 @@
             <tfoot>
             <tr>
                 <th>ID</th>
+                <th>Flag</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Birthdate</th>
                 <th>Phone</th>
+                <th>View</th>
+                <th>Delete</th>
             </tr>
             </tfoot>
         </table> <!-- Main Table -->

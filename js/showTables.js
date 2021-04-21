@@ -16,10 +16,12 @@ $(document).ready(function() {
 		"order": [[ 5, "desc" ]]
 	});
 
+	/*
 	// set row click redirect
 	$("#guestInfo tbody").on('click', 'tr', function() {
 		window.location = $(this).attr('data-href');
 	});
+		 */
 	$("#needInfo tbody").on('click', 'tr', function() {
 		window.location = $(this).attr('data-href');
 	});

@@ -19,7 +19,6 @@
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
     RewriteRule ^views/ = [F,L]
     RewriteRule ^model/ = [F,L]
-    RewriteRule ^includes/ = [F,L]
     RewriteRule ^classes/ = [F,L]
 
 

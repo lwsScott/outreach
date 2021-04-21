@@ -514,6 +514,7 @@ class Controller
         $f3->set('notes', $guest['notes']);
         $f3->set('vouchers', $mainVouch);
         $f3->set('members', $mainMem);
+        $f3->set('flag', $guest['flag']);
 
         //WORKS UP UNTIL THIS POINT
 
@@ -550,6 +551,7 @@ class Controller
             $name = $_POST['name'];
             $age = $_POST['age'];
             $gender = $_POST['gender'];
+            $flag = $_POST['flag'];
 
             // convert phone format for display
             $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
@@ -580,6 +582,8 @@ class Controller
             $f3->set('pse', $pse);
             $f3->set('water', $water);
             $f3->set('notes', $notes);
+            $f3->set('flag', $flag);
+
             $mainVouch = array();
             for($i = 0; $i < sizeof($voucher); $i++){
                 if(!empty($voucher[$i]) || !empty($resource[$i]) ) {
