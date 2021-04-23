@@ -124,13 +124,14 @@ class Database
      * @param $veteran
      * @param $homeless
      * @param $notes
+     *  @param $flag
      */
-    function insertGuest($first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license, $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $senior, $veteran, $homeless, $notes)
+    function insertGuest($first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license, $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $senior, $veteran, $homeless, $notes, $flag)
     {
         //global $dbh;
         //1. Define the query
-        $sql= "INSERT INTO Guests (first, last, birthdate, phone, email, ethnicity, street, city, zip, license, pse, water, income, rent, foodStamp, addSupport, mental, physical, senior, veteran, homeless, notes)
-						VALUES (:first, :last,:birthdate, :phone, :email, :ethnicity, :street, :city, :zip, :license, :pse, :water, :income, :rent, :foodStamp, :addSupport, :mental, :physical, :senior, :veteran, :homeless, :notes)";
+        $sql= "INSERT INTO Guests (first, last, birthdate, phone, email, ethnicity, street, city, zip, license, pse, water, income, rent, foodStamp, addSupport, mental, physical, senior, veteran, homeless, notes, flag)
+						VALUES (:first, :last,:birthdate, :phone, :email, :ethnicity, :street, :city, :zip, :license, :pse, :water, :income, :rent, :foodStamp, :addSupport, :mental, :physical, :senior, :veteran, :homeless, :notes, :flag)";
 
         //2. Prepare the statement
         $statement = $this->dbh->prepare($sql);
@@ -158,6 +159,7 @@ class Database
         $statement->bindParam(':veteran', $veteran, PDO::PARAM_STR);
         $statement->bindParam(':homeless', $homeless, PDO::PARAM_STR);
         $statement->bindParam(':notes', $notes, PDO::PARAM_STR);
+        $statement->bindParam(':flag', $flag, PDO::PARAM_STR);
 
         //4. Execute the query
         $statement->execute();
@@ -422,13 +424,14 @@ class Database
      * @param $veteran
      * @param $homeless
      * @param $notes
+     * @param $flag
      */
     function editGuest($id, $first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license,
-                       $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $senior, $veteran, $homeless, $notes){
+                       $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $senior, $veteran, $homeless, $notes, $flag){
         $sql= "UPDATE Guests SET first=:first, last=:last, birthdate=:birthdate, phone=:phone, email=:email, ethnicity=:ethnicity,
                   street=:street, city=:city, zip=:zip, license=:license, pse=:pse, water=:water, income=:income, rent=:rent,
                   foodStamp=:foodStamp, addSupport=:addSupport, mental=:mental, physical=:physical, senior=:senior, veteran=:veteran,
-                  homeless=:homeless, notes=:notes WHERE ClientId=:ClientId";
+                  homeless=:homeless, notes=:notes, flag=:flag WHERE ClientId=:ClientId";
         $statement = $this->dbh->prepare($sql);
         //3. Bind parameters
         $statement->bindParam(':ClientId', $id, PDO::PARAM_INT);
@@ -454,6 +457,7 @@ class Database
         $statement->bindParam(':veteran', $veteran, PDO::PARAM_STR);
         $statement->bindParam(':homeless', $homeless, PDO::PARAM_STR);
         $statement->bindParam(':notes', $notes, PDO::PARAM_STR);
+        $statement->bindParam(':flag', $flag, PDO::PARAM_STR);
         //4. Execute the query
         $statement->execute();
     }

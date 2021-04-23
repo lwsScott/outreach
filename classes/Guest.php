@@ -37,6 +37,8 @@ class Guest
     protected $_veteran;
     protected $_homeless;
     protected $_notes;
+    protected $_flag;
+
 
     /**
      * Guest.class constructor.
@@ -418,6 +420,24 @@ class Guest
     {
         $this->_ClientId = $ClientId;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFlag()
+    {
+        return $this->_flag;
+    }
+
+    /**
+     * @param mixed $flag
+     */
+    public function setFlag($flag)
+    {
+        $this->_flag = $flag;
+    }
+
+
 
 
 }

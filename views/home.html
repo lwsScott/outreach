@@ -87,20 +87,20 @@
                 <check if="{{ @guest['hidden'] != 'y' }}">
                     <tr  class="tableRow" data-href="{{ @BASE }}/{{@guest['ClientId']}}">
                         <td>{{@guest['ClientId']}}</td>
-                        <td><input class='completed' type='checkbox' id="complete{{@guest['flag']}}" <check if="{{ @guest['flag'] == 1 }}">checked></check></td>
+                        <td><input class='completed' type='checkbox' id="complete{{@guest['flag']}}" <check if="{{ @guest['flag'] == 'on' }}">checked></check></td>
                         <td>{{@guest['first']}} </td>
                         <td>{{@guest['last']}}</td>
                         <td data-sort="{{ strtotime(@guest['birthdate']) }}">{{@guest['birthdate']}}</td>
                         <td>{{@guest['phone']}}</td>
                         <td>
                             <!--<a href='includes/delete.php?recordId={{@request["id"]}}' class='btn btn-sm text-white mt-2'>Delete</a>-->
-                            <a href="{{ @BASE }}/{{@guest['ClientId']}}" class='btn btn-sm mt-2'>View</a>
+                            <a href="{{ @BASE }}/{{@guest['ClientId']}}" class='btn btn-primary btn-sm mt-2 '>View</a>
                         </td>
                         <td>
                             <!--<a href='includes/delete.php?recordId={{@request["id"]}}' class='btn btn-sm text-white mt-2'>Delete</a>-->
                             <a onclick="return confirm('Are you sure?')"
                                href='includes/delete.php?recordId={{@guest["ClientId"]}}'
-                               class='btn btn-sm mt-2'>Delete</a>
+                               class='btn btn-danger btn-sm mt-2'>Delete</a>
                         </td>
                     </tr>
                 </check>

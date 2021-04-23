@@ -6,6 +6,15 @@ if (isset($_GET['recordId'])) {
     $recordId = $_GET['recordId'];
     $query = "DELETE FROM Guests WHERE ClientId='$recordId'";
     $result = $cnxn ->query($query) or die("Error in query3".$cnxn->error);
+
+
+    $query = "DELETE FROM Household WHERE Guests_ClientId='$recordId'";
+    $result = $cnxn ->query($query) or die("Error in query3".$cnxn->error);
+
+    $query = "DELETE FROM Needs WHERE Guests_ClientId='$recordId'";
+    $result = $cnxn ->query($query) or die("Error in query3".$cnxn->error);
+
+
     // if delete works, redirect page back to control page
     if ($result) {
         //echo '<script>window.location.href="../control.php";</script>';
