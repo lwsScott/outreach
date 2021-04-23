@@ -231,6 +231,8 @@ class Controller
             $name = $_POST['name'];
             $age = $_POST['age'];
             $gender = $_POST['gender'];
+            $flag = $_POST['flag'];
+
 
             // convert phone format
             $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
@@ -262,6 +264,8 @@ class Controller
             $f3->set('pse', $pse);
             $f3->set('water', $water);
             $f3->set('notes', $notes);
+            $f3->set('flag', $flag);
+
 
             $mainVouch = array();
             for($i = 0; $i < sizeof($voucher);$i++){
@@ -349,6 +353,7 @@ class Controller
                 $guest->setPse($pse);
                 $guest->setWater($water);
                 $guest->setNotes($notes);
+                $guest->setFlag($flag);
                 $database = new Database();
 
                 //insert the guest into the database
@@ -356,7 +361,7 @@ class Controller
                     $guest->getEmail(),$guest->getEthnicity(),$guest->getStreet(),$guest->getCity(),$guest->getZip(),
                     $guest->getLicense(),$guest->getPse(),$guest->getWater(),$guest->getIncome(),$guest->getRent(),
                     $guest->getFoodStamp(),$guest->getAdditionalSupport(),$guest->getMental(),$guest->getPhysical(), $guest->getSenior(),
-                    $guest->getVeteran(),$guest->getHomeless(),$guest->getNotes());
+                    $guest->getVeteran(),$guest->getHomeless(),$guest->getNotes(),$guest->getFlag());
 
                 $lastId = $database->getLastId();
                 $f3->set('lastId', $lastId);
@@ -462,8 +467,6 @@ class Controller
                 $date = $date->format('m/d/Y');
                 $f3->set('Food', $date);
             }
-
-
         }
 
 
@@ -648,12 +651,13 @@ class Controller
                 $guest->setPse($pse);
                 $guest->setWater($water);
                 $guest->setNotes($notes);
+                $guest->setFlag($flag);
                 $database = new Database();
                 $database->editGuest($id,$guest->getFirstName(),$guest->getLastName(),$guest->getBirthdate(),$guest->getPhone(),
                     $guest->getEmail(),$guest->getEthnicity(),$guest->getStreet(),$guest->getCity(),$guest->getZip(),
                     $guest->getLicense(),$guest->getPse(),$guest->getWater(),$guest->getIncome(),$guest->getRent(),
                     $guest->getFoodStamp(),$guest->getAdditionalSupport(),$guest->getMental(),$guest->getPhysical(), $guest->getSenior(),
-                    $guest->getVeteran(),$guest->getHomeless(),$guest->getNotes());
+                    $guest->getVeteran(),$guest->getHomeless(),$guest->getNotes(),$guest->getFlag());
 
                 if(!empty($mainVouch)){
                     for($i = 0; $i < sizeof($mainVouch);$i++){
@@ -778,6 +782,7 @@ class Controller
             $name = $_POST['name'];
             $age = $_POST['age'];
             $gender = $_POST['gender'];
+            $flag = $_POST['flag'];
 
             // convert phone format for display
             $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
@@ -808,6 +813,7 @@ class Controller
             $f3->set('pse', $pse);
             $f3->set('water', $water);
             $f3->set('notes', $notes);
+            $f3->set('flag', $flag);
             $mainVouch = array();
             for($i = 0; $i < sizeof($voucher); $i++){
                 if(!empty($voucher[$i]) || !empty($resource[$i]) ) {
@@ -872,6 +878,7 @@ class Controller
                 $guest->setPse($pse);
                 $guest->setWater($water);
                 $guest->setNotes($notes);
+                $guest->setFlag($flag);
                 $database = new Database();
                 /*
                 $database->editGuest($id,$guest->getFirstName(),$guest->getLastName(),$guest->getBirthdate(),$guest->getPhone(),
@@ -885,7 +892,7 @@ class Controller
                     $guest->getEmail(),$guest->getEthnicity(),$guest->getStreet(),$guest->getCity(),$guest->getZip(),
                     $guest->getLicense(),$guest->getPse(),$guest->getWater(),$guest->getIncome(),$guest->getRent(),
                     $guest->getFoodStamp(),$guest->getAdditionalSupport(),$guest->getMental(),$guest->getPhysical(), $guest->getSenior(),
-                    $guest->getVeteran(),$guest->getHomeless(),$guest->getNotes());
+                    $guest->getVeteran(),$guest->getHomeless(),$guest->getNotes(),$guest->getFlag());
 
                 $database->markAssistanceComplete($id);
 
@@ -1003,7 +1010,7 @@ class Controller
      */
     public function setHiveVariables($f3, $firstName, $lastName, $birthdate, string $phone, $email,
                      $ethnicity, $street, $city, $zip, $mental, $physical, $senior, $veteran, $homeless,
-                     $income, $rent, $foodStamp, $addSupport, $license, $pse, $water, $notes)
+                     $income, $rent, $foodStamp, $addSupport, $license, $pse, $water, $notes, $flag)
     {
         $f3->set('firstName', $firstName);
         $f3->set('lastName', $lastName);
@@ -1027,6 +1034,7 @@ class Controller
         $f3->set('pse', $pse);
         $f3->set('water', $water);
         $f3->set('notes', $notes);
+        $f3->set('flag', $flag);
 
     }
 }
