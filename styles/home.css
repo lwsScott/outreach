@@ -30,7 +30,7 @@ div#zipLabel
     margin: 0;
 }
 
-div#guestInfo_filter input, div#needInfo_filter input, div#incomeInfo_filter input, div#addressInfo_filter input, div#houseInfo_filter input
+div#guestInfo_filter input, div#guestInfoRequest_filter input, div#needInfo_filter input, div#incomeInfo_filter input, div#addressInfo_filter input, div#houseInfo_filter input
 {
     display: block;
     padding: .5rem .75rem;
@@ -45,7 +45,7 @@ div#guestInfo_filter input, div#needInfo_filter input, div#incomeInfo_filter inp
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
-div#guestInfo_filter label, div#needInfo_filter label, div#incomeInfo_filter label, div#addressInfo_filter label, div#houseInfo_filter label
+div#guestInfo_filter label, div#guestInfoRequest_filter label, div#needInfo_filter label, div#incomeInfo_filter label, div#addressInfo_filter label, div#houseInfo_filter label
 {
     font-size: 1.1rem;
     text-align: left;

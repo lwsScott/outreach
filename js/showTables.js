@@ -9,19 +9,18 @@ $(document).ready(function() {
 	let main = $("#guestInfo");
 
 	main.DataTable( {
-		// last name = 2
-		"order": [[ 2, "asc" ]]
+		// ID = 0
+		"order": [[ 0, "asc" ]]
 	});
 	$("#needInfo").DataTable( {
 		"order": [[ 5, "desc" ]]
 	});
 
-	/*
 	// set row click redirect
-	$("#guestInfo tbody").on('click', 'tr', function() {
+	$("#guestInfoRequest tbody").on('click', 'tr', function() {
 		window.location = $(this).attr('data-href');
 	});
-		 */
+
 	$("#needInfo tbody").on('click', 'tr', function() {
 		window.location = $(this).attr('data-href');
 	});

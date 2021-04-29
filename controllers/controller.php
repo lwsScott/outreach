@@ -782,7 +782,7 @@ class Controller
             $name = $_POST['name'];
             $age = $_POST['age'];
             $gender = $_POST['gender'];
-            $flag = $_POST['flag'];
+            //$flag = $_POST['flag'];
 
             // convert phone format for display
             $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
@@ -813,7 +813,7 @@ class Controller
             $f3->set('pse', $pse);
             $f3->set('water', $water);
             $f3->set('notes', $notes);
-            $f3->set('flag', $flag);
+            //$f3->set('flag', $flag);
             $mainVouch = array();
             for($i = 0; $i < sizeof($voucher); $i++){
                 if(!empty($voucher[$i]) || !empty($resource[$i]) ) {
@@ -878,7 +878,7 @@ class Controller
                 $guest->setPse($pse);
                 $guest->setWater($water);
                 $guest->setNotes($notes);
-                $guest->setFlag($flag);
+                //$guest->setFlag($flag);
                 $database = new Database();
                 /*
                 $database->editGuest($id,$guest->getFirstName(),$guest->getLastName(),$guest->getBirthdate(),$guest->getPhone(),
