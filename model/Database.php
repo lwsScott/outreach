@@ -64,17 +64,6 @@ PRIMARY KEY (`NeedsId`),
  */
 require_once $_SERVER['DOCUMENT_ROOT']."/../config.php";
 
-//require("/home/stjamesk/dotcom/creds/creds.php");
-/*
-if ($_SERVER['USER'] == 'lscottgr')
-{
-    require_once $_SERVER['DOCUMENT_ROOT']."/../config.php";
-    require_once $_SERVER['DOCUMENT_ROOT']."/../db.php";
-}
-else {
-    require_once $_SERVER['DOCUMENT_ROOT']."/../config.php";
-}
-*/
 //echo DB_DSN;
 //echo DB_USERNAME;
 //echo DB_PASSWORD;
@@ -174,6 +163,22 @@ class Database
     {
         // Define the query
         $sql = "SELECT * FROM Guests ";
+        // Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        // Execute the statement
+        $statement->execute();
+        // Process the result
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * check all the requests in the outreach_form database table
+     * @return array of requests
+     */
+    function checkExists()
+    {
+        // Define the query
+        $sql = "UPDATE outreach_form, Guests SET outreach_form.ClientId = Guests.ClientId WHERE Guests.first = outreach_form.FirstName AND last = outreach_form.LastName;";
         // Prepare the statement
         $statement = $this->dbh->prepare($sql);
         // Execute the statement
@@ -751,7 +756,7 @@ class Database
 					where ethnicity= 'mixed' AND hidden != 'y')
 					union (
 					select 'Not Provided' as Label, count(ethnicity) as Value from Guests 
-					where ethnicity= 'Prefer not to answer' AND hidden != 'y')
+					where (ethnicity= 'Prefer not to answer' AND hidden != 'y') OR (ethnicity = ''  AND hidden != 'y') )
 					union (
 					select 'Other' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'other' AND hidden != 'y')";
@@ -780,11 +785,11 @@ class Database
                     union (
 					    select 'Not Provided' as Label, count(gender) as Value from Household
 					    LEFT JOIN Guests ON Household.Guests_ClientId = Guests.ClientId
-                        where gender= 'Prefer not to answer' AND hidden != 'y')
+                        where (gender= 'Prefer not to answer' AND hidden != 'y') OR (gender= '' AND hidden != 'y'))
                     union (
 					    select 'Other' as Label, count(gender) as Value from Household
 					    LEFT JOIN Guests ON Household.Guests_ClientId = Guests.ClientId
-					    where gender= 'other' AND hidden != 'y')";
+					    where (gender= 'other' AND hidden != 'y') OR (gender= 'Other' AND hidden != 'y'))";
         // Prepare the statement
         $statement = $this->dbh->prepare($sql);
         // Execute the statement
@@ -801,22 +806,22 @@ class Database
     {
         // Define the query
         $sql = "select '98058' as Label, count(zip) as Value from Guests 
-					where zip= '98058' AND hidden != 'y'
+					where zip= '98058' AND hidden != 'y' AND homeless != 'on'
 					union (
 					select '98042' as Label, count(zip) as Value from Guests 
-					where zip= '98042' AND hidden != 'y')
+					where zip= '98042' AND hidden != 'y' AND homeless != 'on')
 					union (
 					select '98032' as Label, count(zip) as Value from Guests 
-					where zip= '98032' AND hidden != 'y')
+					where zip= '98032' AND hidden != 'y' AND homeless != 'on') 
 					union (
 					select '98031' as Label, count(zip) as Value from Guests 
-					where zip= '98031' AND hidden != 'y')
+					where zip= '98031' AND hidden != 'y' AND homeless != 'on') 
 					union (
 					select '98030' as Label, count(zip) as Value from Guests 
-					where zip= '98030' AND hidden != 'y')
+					where zip= '98030' AND hidden != 'y' AND homeless != 'on')
 					union (
 					select 'Other' as Label, count(zip) as Value from Guests 
-					where zip NOT IN ('98030', '98058', '98042', '98032', '98031') AND hidden != 'y')
+					where zip NOT IN ('98030', '98058', '98042', '98032', '98031') AND hidden != 'y' AND homeless != 'on')
 					union (
 					select 'Homeless' as Label, count(homeless) as Value from Guests 
 					where homeless = 'on' AND hidden != 'y')";
@@ -836,10 +841,10 @@ class Database
     {
         // Define the query
         $sql = "select 'Mental' as Label, count(mental) as Value from Guests 
-					where mental= 'on' AND hidden != 'y'
+					where mental= 'on' AND hidden != 'y' AND physical != 'on'
 					union (
 					select 'Physical' as Label, count(physical) as Value from Guests 
-					where physical= 'on' AND hidden != 'y')
+					where physical= 'on' AND hidden != 'y' AND mental != 'on') 
 					union (
 					select 'Both' as Label, count(physical) as Value from Guests 
 					where physical= 'on' AND mental = 'on' AND hidden != 'y')
@@ -893,5 +898,77 @@ class Database
         // Process the result
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Inserts strategy into the database
+     * @param $tactic the tactic to add
+     * @param $chooseTactic which tactic to add
+     * @param $change the update or add
+     */
+    function addTask($task)
+    {
+        $clientName = $task->getClient();
+        $taskDate = $task->getDate();
+        $taskTime = $task->getTime();
+        $resourceType = $task->getAssistance();
+        $taskAmount = $task->getAmount();
+        $paid = $task->getPaid();
+        $userId = $_SESSION['userId'];
+        //1. Define the query
+        $sql = "INSERT INTO tasks(clientName, taskDate, taskTime, resourceType, taskAmount, paid)
+                    VALUES (:clientName, :taskDate, :taskTime, :resourceType, :taskAmount, :paid)";
+
+        //2. Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        //3. Bind the parameters
+        $statement->bindParam(':clientName',$clientName, PDO::PARAM_STR);
+        $statement->bindParam(':taskDate',$taskDate, PDO::PARAM_STR);
+        $statement->bindParam(':taskTime',$taskTime, PDO::PARAM_STR);
+        $statement->bindParam(':resourceType',$resourceType, PDO::PARAM_STR);
+        $statement->bindParam(':taskAmount',$taskAmount, PDO::PARAM_STR);
+        $statement->bindParam(':paid',$paid, PDO::PARAM_STR);
+
+        //4. Execute the statement
+        $result = $statement->execute();
+        //echo "Result: " . $result;
+        //Get the key of the last inserted row
+        $taskId = $this->dbh->lastInsertId();
+        $_SESSION['taskId'] = $taskId;
+        //echo $id;
+    }
+
+    /*
+    * The user's tasks
+    */
+    function getTasks()
+    {
+        // Define the query
+        $sql = "SELECT * FROM tasks ";
+        // Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        // Execute the statement
+        $statement->execute();
+        // Process the result
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /*
+    * Delete task
+    */
+    function deleteTask($taskId)
+    {
+        //1. Define the query
+        $sql = "DELETE FROM tasks
+        WHERE taskID = $taskId";
+        //2. Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $statement->bindParam(':userId', $userId);
+
+        //4. Execute the statement
+        $statement->execute();
+
     }
 }

@@ -191,3 +191,8 @@ p.text-warning
 #username {
     margin-left: 1em;
 }
+
+.hidden {
+    visibility: hidden;
+    display: none;
+}

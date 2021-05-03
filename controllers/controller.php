@@ -43,6 +43,7 @@ class Controller
 
 
         $database = new Database();
+        $database->checkExists();
         $requests = $database->getRequests();
 
         $f3->set('requests', $requests);
@@ -51,6 +52,83 @@ class Controller
 
         $template = new Template();
         echo $template->render('views/requests.html');
+    }
+
+    public function budget($f3)
+    {
+        //if logged in
+        if(empty($_SESSION['username']))
+        {
+            $f3->reroute('/');
+        }
+        // date format change
+        $dateToday = date("m/d/Y");
+        $f3->set('dateToday',$dateToday);
+
+        $database = new Database();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $valid = true;
+            // validate the data and set hive variables
+            if (isset($_POST['clientName'])) {
+                $clientName = $_POST['clientName'];
+            } else {
+                $valid = false;
+            }
+            if (isset($_POST['taskDate'])) {
+                $taskDate = $_POST['taskDate'];
+            } else {
+                $valid = false;
+            }
+            if (isset($_POST['taskTime'])) {
+                $taskTime = $_POST['taskTime'];
+            } else {
+                $valid = false;
+            }
+            if (isset($_POST['resource'])) {
+                //$assistance = implode(", ", $_POST['assistance']);
+                $resourceType = implode(", ", $_POST['resource']);
+            } else {
+                $valid = false;
+            }
+            if (isset($_POST['taskAmount'])) {
+                $taskAmount = $_POST['taskAmount'];
+            } else {
+                $valid = false;
+            }
+            $paid = 0;
+
+            $userId = $_SESSION['userId'];
+
+            // construct tasks
+            if ($valid) {
+                $task = new Task($clientName, $taskDate, $taskTime, $resourceType, $taskAmount, $paid);
+                $this->_f3->set('task', $task);
+                // add the task to the database
+                $database->addTask($task);
+           }
+
+            // delete the task from the database
+            if (isset($_POST['taskID'])) {
+                $taskId = $_POST['taskID'];
+                $database->deleteTask($taskId);
+            }
+
+            $_POST = array();
+            //$f3->reroute("tactical");
+            //header ('Location: ' . $_SERVER['REQUEST_URI']);
+
+            //$view = new Template();
+            //echo $view->render('views/tactical.html');
+        }
+        unset($_POST);
+        $_POST = array();
+
+        $result = $database->getTasks();
+        $this->_f3->set('result', $result);
+
+        $template = new Template();
+        echo $template->render('views/budget.html');
     }
 
     public function login($f3)
@@ -782,7 +860,7 @@ class Controller
             $name = $_POST['name'];
             $age = $_POST['age'];
             $gender = $_POST['gender'];
-            //$flag = $_POST['flag'];
+            $flag = $_POST['flag'];
 
             // convert phone format for display
             $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
@@ -813,7 +891,7 @@ class Controller
             $f3->set('pse', $pse);
             $f3->set('water', $water);
             $f3->set('notes', $notes);
-            //$f3->set('flag', $flag);
+            $f3->set('flag', $flag);
             $mainVouch = array();
             for($i = 0; $i < sizeof($voucher); $i++){
                 if(!empty($voucher[$i]) || !empty($resource[$i]) ) {
@@ -878,7 +956,7 @@ class Controller
                 $guest->setPse($pse);
                 $guest->setWater($water);
                 $guest->setNotes($notes);
-                //$guest->setFlag($flag);
+                $guest->setFlag($flag);
                 $database = new Database();
                 /*
                 $database->editGuest($id,$guest->getFirstName(),$guest->getLastName(),$guest->getBirthdate(),$guest->getPhone(),
