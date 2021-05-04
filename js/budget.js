@@ -18,9 +18,12 @@ $('#table1 tbody').on( 'dblclick', 'tr', function () {
         $(this).addClass('selected');
         let add = table.row( this ).data();
         console.log(add);
-        let taskID = add[5];
+        let taskID = add[6];
+        let taskIDedit = add[6];
         console.log(taskID);
+        console.log(taskIDedit);
         document.getElementById('taskID').value = taskID;
+        document.getElementById('taskIDedit').value = taskID;
         console.log(document.getElementById('taskID').value);
     }
 } );

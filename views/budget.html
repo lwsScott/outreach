@@ -19,8 +19,27 @@
 <div class="container">
     <h3>Weekly Tasks</h3>
 
-    <hr>
+    <table class="table table-bordered table-responsive" id="budgeted">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Budget</th>
+                <th scope="col">Estimates</th>
+            </tr>
+        </thead>
+        <tbody>
+            <td>{{ @budget }}</td>
+            <td>{{ @estimates }}</td>
+        </tbody>
 
+    <form action="#" method="post" class="form-horizontal" id="addBudget">
+        <div class="form-group">
+            <label for="budget">Weekly Budget: </label>
+            <input type="text" class="form-control" id="budget" name="budget">
+        </div>
+        <button type="submit" class="btn btn-primary">Set Budget</button>
+    </form>
+
+    <hr>
 
     <div class="container">
         <table class="table table-bordered table-responsive" id="table1">
@@ -31,6 +50,7 @@
                     <th scope="col">Time</th>
                     <th scope="col">Resource</th>
                     <th scope="col">Amount</th>
+                    <th scope="col">Paid</th>
                     <th class="hidden"></th>
                 </tr>
             </thead>
@@ -48,6 +68,8 @@
                                 {{ $row['resourceType'] }}</check> </td>
                             <td><check if="{{ isset(@row) }}">
                                 {{ $row['taskAmount'] }}</check> </td>
+                            <td><check if="{{ isset(@row) }}">
+                                {{ $row['paid'] }}</check></td>
                             <td class="hidden"><check if="{{ isset(@row) }}">
                                 {{ $row['taskID'] }}</check></td>
                         </tr>
@@ -60,6 +82,15 @@
                 <input type="text" class="form-control" id="taskID" name="taskID">
             </div>
             <button type="submit" class="btn btn-danger">Delete selected Task</button>
+        </form>
+        <form action="#" method="post" class="form-horizontal" id="editTask">
+            <div class="form-group hidden">
+                <input type="text" class="form-control" id="taskIDedit" name="taskIDedit">
+            </div>
+            <label for="taskAmount">Actual Paid: </label>
+            <span class="input-group-addon">$ </span>
+            <input type="number" class="form-control" id="paid" name="paid">
+            <button type="submit" class="btn btn-secondary">Edit selected Task</button>
         </form>
     </div>
     <hr>

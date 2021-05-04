@@ -971,4 +971,87 @@ class Database
         $statement->execute();
 
     }
+
+    /*
+* UPdate task
+*/
+    function updateTask($taskId, $paid)
+    {
+        //1. Define the query
+        $sql = "UPDATE tasks
+        SET paid = $paid WHERE taskID = $taskId";
+        //2. Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $statement->execute();
+
+    }
+
+    /**
+     * Inserts strategy into the database
+     * @param $tactic the tactic to add
+     * @param $chooseTactic which tactic to add
+     * @param $change the update or add
+     */
+    function addBudget($budget)
+    {
+        //1. Define the query
+        $sql = "UPDATE budget SET budget = $budget";
+
+        //2. Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        //3. Bind the parameters
+        $statement->bindParam(':budget',$budget, PDO::PARAM_STR);
+
+        //4. Execute the statement
+        $result = $statement->execute();
+        //echo "Result: " . $result;
+        //Get the key of the last inserted row
+        $taskId = $this->dbh->lastInsertId();
+        $_SESSION['taskId'] = $taskId;
+        //echo $id;
+    }
+
+    function getBudget()
+    {
+        //1. Define the query
+        $sql = "SELECT budget FROM budget";
+
+        //2. Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $result = $statement->execute();
+        //echo "Result: " . $result;
+
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $budget = $row[0]['budget'];
+        return $budget;
+        //Get the key of the last inserted row
+        $taskId = $this->dbh->lastInsertId();
+    }
+
+    /**
+     * Sums the estimates of the weekly tasks
+     */
+    function getEstimates()
+    {
+        //1. Define the query
+        $sql = "SELECT SUM(taskAmount) AS value_sum FROM tasks";
+
+        //2. Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $result = $statement->execute();
+        //echo "Result: " . $result;
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $sum = $row[0]['value_sum'];
+        return $sum;
+    }
 }

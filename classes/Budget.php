@@ -36,14 +36,6 @@ class Budget
     }
 
     /**
-     * @param mixed $budgetID
-     */
-    public function setBudgetID($budgetID): void
-    {
-        $this->_budgetID = $budgetID;
-    }
-
-    /**
      * @return mixed
      */
     public function getWeeklyBudget()

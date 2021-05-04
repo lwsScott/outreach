@@ -114,6 +114,23 @@ class Controller
                 $database->deleteTask($taskId);
             }
 
+            // update the amount paid for a task
+            if (isset($_POST['paid'])) {
+                $taskId = $_POST['taskIDedit'];
+                $paid = $_POST['paid'];
+                $database->updateTask($taskId, $paid);
+            }
+
+            // add the budget to the database
+            if (isset($_POST['budget'])) {
+                $budget = $_POST['budget'];
+                $database->addBudget($budget);
+
+                $estimates = $database->getEstimates();
+                $f3->set('estimates',$estimates);
+                $f3->set('budget',$budget);
+            }
+
             $_POST = array();
             //$f3->reroute("tactical");
             //header ('Location: ' . $_SERVER['REQUEST_URI']);
@@ -123,6 +140,12 @@ class Controller
         }
         unset($_POST);
         $_POST = array();
+
+        $budget = $database->getBudget();
+
+        $estimates = $database->getEstimates();
+        $f3->set('estimates',$estimates);
+        $f3->set('budget',$budget);
 
         $result = $database->getTasks();
         $this->_f3->set('result', $result);
