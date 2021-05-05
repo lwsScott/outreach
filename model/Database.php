@@ -1054,4 +1054,24 @@ class Database
         $sum = $row[0]['value_sum'];
         return $sum;
     }
+
+    /**
+     * Sums the estimates of the weekly tasks
+     */
+    function getPaid()
+    {
+        //1. Define the query
+        $sql = "SELECT SUM(paid) AS value_sum FROM tasks";
+
+        //2. Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $result = $statement->execute();
+        //echo "Result: " . $result;
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $sum = $row[0]['value_sum'];
+        return $sum;
+    }
 }

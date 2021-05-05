@@ -135,9 +135,13 @@ class Controller
                 $f3->set('estimates',$estimates);
                 $f3->set('budget',$budget);
                 $bme = $budget - $estimates;
+                $bme = number_format($bme, 2, '.', '');
+
                 $f3->set('budgetMinusEstimates', $bme);
+
+                $paid = $database->getPaid();
                 $bmp = $budget - $paid;
-                echo "<br><br><br><br><br><br><br><p>hello</p>";
+                $bmp = number_format($bmp, 2, '.', '');
                 $f3->set('budgetMinusPaid', $bmp);
             }
 
@@ -152,10 +156,21 @@ class Controller
         $_POST = array();
 
         $budget = $database->getBudget();
+        $f3->set('budget',$budget);
 
         $estimates = $database->getEstimates();
         $f3->set('estimates',$estimates);
-        $f3->set('budget',$budget);
+
+        $paid = $database->getPaid();
+        $f3->set('paid',$paid);
+
+        $bme = $budget - $estimates;
+        $bme = number_format($bme, 2, '.', '');
+        $f3->set('budgetMinusEstimates', $bme);
+
+        $bmp = $budget - $paid;
+        $bmp = number_format($bmp, 2, '.', '');
+        $f3->set('budgetMinusPaid', $bmp);
 
         $result = $database->getTasks();
         $this->_f3->set('result', $result);
