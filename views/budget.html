@@ -19,37 +19,56 @@
 <div class="container">
     <h3>Weekly Tasks</h3>
 
-    <table class="table table-bordered table-responsive" id="budgeted">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">Budget</th>
-                <th scope="col">Estimates</th>
-            </tr>
-        </thead>
-        <tbody>
-            <td>{{ @budget }}</td>
-            <td>{{ @estimates }}</td>
-        </tbody>
-
-    <form action="#" method="post" class="form-horizontal" id="addBudget">
-        <div class="form-group">
-            <label for="budget">Weekly Budget: </label>
-            <input type="text" class="form-control" id="budget" name="budget">
+    <form action="#" method="post" class="form-inline" id="addBudget">
+        <div class="form-group pl-5">
+            <div class="row">
+                <label for="budget">Weekly Budget:&nbsp&nbsp</label>
+                <input type="text" class="form-control mr-2" id="budget" name="budget">
+                <button type="submit" class="btn btn-primary">Set Budget</button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Set Budget</button>
     </form>
 
     <hr>
 
+    <table class="table table-bordered table-responsive" id="budgeted">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Total</th>
+                <th scope="col">Remaining</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Budget</th>
+                <td>{{ @budget }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Estimated</th>
+                <td>{{ @estimates }}</td>
+                <td>{{ @budgetMinusEstimates }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Used</th>
+                <td>{{ @paid }}</td>
+                <td>{{ @budgetMinusPaid }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
     <div class="container">
-        <table class="table table-bordered table-responsive" id="table1">
+        <table class="table table-bordered table-responsive table-striped table-hover" id="table1">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col">Client Name</th>
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
+                    <th scope="col">Client Name</th>
                     <th scope="col">Resource</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Estimated</th>
                     <th scope="col">Paid</th>
                     <th class="hidden"></th>
                 </tr>
@@ -59,11 +78,11 @@
                     <repeat group="{{ @result }}" value="{{ @row }}">
                         <tr>
                             <td><check if="{{ isset(@row) }}" >
-                                {{ $row['clientName'] }} </check></td>
-                            <td><check if="{{ isset(@row) }}" >
                                 {{ $row['taskDate'] }} </check></td>
                             <td><check if="{{ isset(@row) }}" >
                                 {{ $row['taskTime'] }}</check> </td>
+                            <td><check if="{{ isset(@row) }}" >
+                                {{ $row['clientName'] }} </check></td>
                             <td><check if="{{ isset(@row) }}">
                                 {{ $row['resourceType'] }}</check> </td>
                             <td><check if="{{ isset(@row) }}">
@@ -81,16 +100,19 @@
             <div class="form-group hidden">
                 <input type="text" class="form-control" id="taskID" name="taskID">
             </div>
-            <button type="submit" class="btn btn-danger">Delete selected Task</button>
+            <button type="submit" class="btn btn-danger float-right mt-2">Delete selected Task</button>
         </form>
-        <form action="#" method="post" class="form-horizontal" id="editTask">
+        <br>
+        <br>
+        <hr>
+        <form action="#" method="post" class="form-inline" id="editTask">
             <div class="form-group hidden">
                 <input type="text" class="form-control" id="taskIDedit" name="taskIDedit">
             </div>
-            <label for="taskAmount">Actual Paid: </label>
-            <span class="input-group-addon">$ </span>
-            <input type="number" class="form-control" id="paid" name="paid">
-            <button type="submit" class="btn btn-secondary">Edit selected Task</button>
+            <label for="taskAmount">Actually Paid Out: </label>
+            <span class="input-group-addon ml-2">$ </span>
+            <input type="number" class="form-control mr-2" id="paid" name="paid">
+            <button type="submit" class="btn btn-primary">Edit selected Task</button>
         </form>
     </div>
     <hr>
@@ -100,31 +122,39 @@
             <fieldset class="form-group">
                 <legend>Add Task</legend>
 
-                <label for="clientName">Client Name: </label>
-                <input type="text" class="form-control" id="clientName" name="clientName">
+                <div class="form-inline">
+                    <label for="clientName">Client Name: </label>
+                    <input type="text" class="form-control ml-2 mr-5" id="clientName" name="clientName">
 
-                <label for="taskDate">Date: </label>
-                <input type="date" class="form-control" id="taskDate" name="taskDate">
+                    <label for="taskDate">Date: </label>
+                    <input type="date" class="form-control ml-2 mr-5" id="taskDate" name="taskDate">
 
-                <label for="taskTime">Time: </label>
-                <input type="time" class="form-control" id="taskTime" name="taskTime">
-
-                <label class='form-check-label'>Resource: </label>
-                <label class='d-block'></label>
-
-                <select class="form-control dropdown" name="resource[]" multiple>
-                    <repeat group="{{@listResources}}" value="{{@thisResource}}">
-                        <option value="{{ str_replace(' ', '', strtolower(@thisResource)) }}" > {{ @thisResource }}</option>
-                    </repeat>
-                </select>
-
-                <label for="taskAmount">Amount: </label>
-                <span class="input-group-addon">$ </span>
-                <input type="number" class="form-control" id="taskAmount" name="taskAmount">
-
-                <div class="pt-2">
-                    <button id = "taskSubmit" type="submit" class="btn btn-primary">Add Task</button>
+                    <label for="taskTime">Time: </label>
+                    <input type="time" class="form-control ml-2" id="taskTime" name="taskTime">
                 </div>
+
+                <div class="form-inline">
+                    <label class='form-check-label'>Resource: </label>
+                    <label class='d-block'></label>
+
+                    <select class="form-control dropdown" name="resource[]" multiple>
+                        <repeat group="{{@listResources}}" value="{{@thisResource}}">
+                            <option value="{{ str_replace(' ', '', strtolower(@thisResource)) }}" > {{ @thisResource }}</option>
+                        </repeat>
+                    </select>
+
+                    <p>&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+
+                    <label for="taskAmount">Amount: </label>
+                    <span class="input-group-addon">$ </span>
+                    <input type="number" class="form-control mr-5" id="taskAmount" name="taskAmount">
+
+
+                    <div class="pt-2">
+                        <button id = "taskSubmit" type="submit" class="btn btn-primary">Add Task</button>
+                    </div>
+                </div>
+
             </fieldset>
         </form>
     </div>

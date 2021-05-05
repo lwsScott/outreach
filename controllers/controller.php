@@ -96,7 +96,11 @@ class Controller
             } else {
                 $valid = false;
             }
-            $paid = 0;
+            if (isset($_POST['paid'])) {
+                $paid = $_POST['paid'];
+            } else {
+                $valid = false;
+            }
 
             $userId = $_SESSION['userId'];
 
@@ -119,6 +123,7 @@ class Controller
                 $taskId = $_POST['taskIDedit'];
                 $paid = $_POST['paid'];
                 $database->updateTask($taskId, $paid);
+                $f3->set('paid', $paid);
             }
 
             // add the budget to the database
@@ -129,6 +134,11 @@ class Controller
                 $estimates = $database->getEstimates();
                 $f3->set('estimates',$estimates);
                 $f3->set('budget',$budget);
+                $bme = $budget - $estimates;
+                $f3->set('budgetMinusEstimates', $bme);
+                $bmp = $budget - $paid;
+                echo "<br><br><br><br><br><br><br><p>hello</p>";
+                $f3->set('budgetMinusPaid', $bmp);
             }
 
             $_POST = array();
