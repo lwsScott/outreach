@@ -96,8 +96,13 @@ class Controller
             } else {
                 $valid = false;
             }
+            if (isset($_POST['paid'])) {
+                $paid = $_POST['paid'];
+            } else {
+                $paid = 0;
+            }
 
-            $userId = $_SESSION['userId'];
+                $userId = $_SESSION['userId'];
 
             // construct tasks
             if ($valid) {
