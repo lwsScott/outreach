@@ -96,11 +96,6 @@ class Controller
             } else {
                 $valid = false;
             }
-            if (isset($_POST['paid'])) {
-                $paid = $_POST['paid'];
-            } else {
-                $valid = false;
-            }
 
             $userId = $_SESSION['userId'];
 
