@@ -50,7 +50,7 @@ class Task
     /**
      * @param mixed $taskID
      */
-    public function setTaskID($taskID): void
+    public function setTaskID($taskID)
     {
         $this->_taskID = $taskID;
     }
@@ -66,7 +66,7 @@ class Task
     /**
      * @param mixed $client
      */
-    public function setClient($client): void
+    public function setClient($client)
     {
         $this->_client = $client;
     }
@@ -82,7 +82,7 @@ class Task
     /**
      * @param mixed $assistance
      */
-    public function setAssistance($assistance): void
+    public function setAssistance($assistance)
     {
         $this->_assistance = $assistance;
     }
@@ -98,7 +98,7 @@ class Task
     /**
      * @param mixed $date
      */
-    public function setDate($date): void
+    public function setDate($date)
     {
         $this->_date = $date;
     }
@@ -114,7 +114,7 @@ class Task
     /**
      * @param mixed $time
      */
-    public function setTime($time): void
+    public function setTime($time)
     {
         $this->_time = $time;
     }
@@ -130,7 +130,7 @@ class Task
     /**
      * @param mixed $amount
      */
-    public function setAmount($amount): void
+    public function setAmount($amount)
     {
         $this->_amount = $amount;
     }
@@ -146,7 +146,7 @@ class Task
     /**
      * @param mixed $paid
      */
-    public function setPaid($paid): void
+    public function setPaid($paid)
     {
         $this->_paid = $paid;
     }

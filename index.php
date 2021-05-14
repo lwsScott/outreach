@@ -14,6 +14,7 @@ error_reporting(E_ALL);
 
 //Create an instance of the Base Class
 $f3 = Base::instance();
+$f3->set('DEBUG', 3);
 $f3->set('ethnicities', getEthnicities());
 $f3->set('listResources', getResources());
 $f3->set('listGenders', getGenders());
