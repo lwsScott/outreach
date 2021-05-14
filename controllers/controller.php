@@ -48,7 +48,7 @@ class Controller
 
         $f3->set('requests', $requests);
 
-        //var_dump($guests);
+        //var_dump($requests);
 
         $template = new Template();
         echo $template->render('views/requests.html');
@@ -95,6 +95,11 @@ class Controller
                 $taskAmount = $_POST['taskAmount'];
             } else {
                 $valid = false;
+            }
+            if (isset($_POST['paid'])) {
+                $taskAmount = $_POST['paid'];
+            } else {
+                $paid = 0;
             }
 
             $userId = $_SESSION['userId'];
