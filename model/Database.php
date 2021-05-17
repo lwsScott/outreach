@@ -943,8 +943,9 @@ class Database
     */
     function getTasks()
     {
+        $taskArchived = 0;
         // Define the query
-        $sql = "SELECT * FROM tasks ";
+        $sql = "SELECT * FROM tasks WHERE archived = $taskArchived";
         // Prepare the statement
         $statement = $this->dbh->prepare($sql);
         // Execute the statement
@@ -959,8 +960,9 @@ class Database
     function deleteTask($taskId)
     {
         //1. Define the query
-        $sql = "DELETE FROM tasks
-        WHERE taskID = $taskId";
+        //$sql = "DELETE FROM tasks
+        //WHERE taskID = $taskId";
+        $sql= "UPDATE tasks SET archived=1 WHERE taskID=$taskId";
         //2. Prepare the statement
         $statement = $this->dbh->prepare($sql);
 

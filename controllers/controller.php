@@ -97,11 +97,8 @@ class Controller
                 $valid = false;
             }
             if (isset($_POST['paid'])) {
-<<<<<<< HEAD
                 $taskAmount = $_POST['paid'];
-=======
                 $paid = $_POST['paid'];
->>>>>>> 430faf6dd71d4c3a3956fddab93475ba49cfea24
             } else {
                 $paid = 0;
             }
