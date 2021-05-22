@@ -19,7 +19,8 @@
     }
   ],
   "require":{
-    "bcosca/fatfree-core":"dev-master"
+    "bcosca/fatfree-core":"dev-master",
+    "mailchimp/marketing": "*"
   },
   "autoload":{
     "classmap": ["classes/","model/","controllers/", "includes/"]

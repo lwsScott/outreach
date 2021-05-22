@@ -1076,4 +1076,59 @@ class Database
         $sum = $row[0]['value_sum'];
         return $sum;
     }
+
+    /*
+    * Update thrift vouchers issued
+    */
+    function updateThriftVouchers()
+    {
+        //1. Define the query
+        $sql = "UPDATE budget SET thriftVoucher = thriftVoucher + 1";
+
+        //2. Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $statement->execute();
+    }
+
+    /*
+    * Reset thrift vouchers issued
+    */
+    function resetThriftVouchers()
+    {
+        //1. Define the query
+        $sql = "UPDATE budget SET thriftVoucher = 0";
+
+        //2. Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $statement->execute();
+    }
+
+    function getThriftVouchers()
+    {
+        //1. Define the query
+        $sql = "SELECT thriftVoucher FROM budget";
+
+        //2. Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $result = $statement->execute();
+        //echo "Result: " . $result;
+
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $thrift = $row[0]['thriftVoucher'];
+        return $thrift;
+        //Get the key of the last inserted row
+        $taskId = $this->dbh->lastInsertId();
+    }
+
 }

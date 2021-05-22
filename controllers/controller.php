@@ -102,7 +102,6 @@ class Controller
             } else {
                 $paid = 0;
             }
-
                 $userId = $_SESSION['userId'];
 
             // construct tasks
@@ -128,7 +127,7 @@ class Controller
             }
 
             // add the budget to the database
-            if (isset($_POST['budget'])) {
+            if (isset($_POST['budget']) && $_POST['budget'] != '') {
                 $budget = $_POST['budget'];
                 $database->addBudget($budget);
 
@@ -145,6 +144,26 @@ class Controller
                 $bmp = number_format($bmp, 2, '.', '');
                 $f3->set('budgetMinusPaid', $bmp);
             }
+
+            // update the number of thrift vouchers issued
+            // and display
+            if (isset($_POST['thrift'])) {
+                $database->updateThriftVouchers();
+
+
+                $thriftVouchers = $database->getThriftVouchers();
+                $f3->set('thriftVouchers', $thriftVouchers);
+            }
+
+            // reset the number of thrift vouchers issued
+            // and display
+            if (isset($_POST['resetThrift'])) {
+                $database->resetThriftVouchers();
+
+                $thriftVouchers = $database->getThriftVouchers();
+                $f3->set('thriftVouchers', $thriftVouchers);
+            }
+
 
             $_POST = array();
             //$f3->reroute("tactical");
@@ -204,15 +223,6 @@ class Controller
         $template = new Template();
         echo $template->render('views/login.html');
     }
-/*
-    public function intake($f3)
-    {
-        //$database = new Database();
-        //if submitted login form
-        $template = new Template();
-        echo $template->render('intake/index.php');
-    }
-*/
 
     public function home($f3)
     {
@@ -417,14 +427,7 @@ class Controller
             include('model/validation.php');
             $isValid = true;
 
-            /*
-            if (!$this->_validator->validName($_POST['first'])) {
-                $isValid = false;
-                echo "false";
-            }
-            */
-
-            if($isValid){
+            if($isValid) {
                 $f3->set('formIsSubmited','true');
                 //replace values for easier access later
                 if($income == null){
@@ -492,6 +495,72 @@ class Controller
 
                 $lastId = $database->getLastId();
                 $f3->set('lastId', $lastId);
+
+                // add the guest to the mailing list
+                // set the Audience ID for the mailing list to add to
+                // this comes from the mailchimp settings
+                $list_id = "fb67dfc029";
+                $subscriber_hash = md5(strtolower($email));
+
+                $mailchimp = new \MailchimpMarketing\ApiClient();
+
+                $mailchimp->setConfig([
+                    'apiKey' => '8d310a609170d90d95a141bde4b8c2ae-us1',
+                    'server' => 'us1'
+                ]);
+
+                try {
+                    $response = $mailchimp->lists->addListMember($list_id, [
+                        "email_address" => "$email",
+                        "status" => "subscribed",
+                        "merge_fields" => [
+                            "FNAME" => "$firstName",
+                            "LNAME" => "$lastName"
+                        ]
+                    ]);
+                    print_r($response);
+                } catch (MailchimpMarketing\ApiException $e) {
+                    echo $e->getMessage();
+                }
+
+                // tag the guest as an Outreach Guest
+                try {
+                    $mailchimp->lists->updateListMemberTags($list_id, $subscriber_hash, [
+                        "tags" => [
+                            [
+                                "name" => "Outreach Guest",
+                                "status" => "active"
+                            ]
+                        ]
+                    ]);
+
+                    echo "The return type for this endpoint is null";
+                } catch (MailchimpMarketing\ApiException $e) {
+                    echo $e->getMessage();
+                }
+
+                // tag the guest as a Thrift Shop User if applicable
+                foreach ($resource as  $item)
+                {
+                    if ($item == "thriftshop")
+                    {
+                        try {
+                            $mailchimp->lists->updateListMemberTags($list_id, $subscriber_hash, [
+                                "tags" => [
+                                    [
+                                        "name" => "Thrift Shop User",
+                                        "status" => "active"
+                                    ]
+                                ]
+                            ]);
+
+                            echo "The return type for this endpoint is null";
+                        } catch (MailchimpMarketing\ApiException $e) {
+                            echo $e->getMessage();
+                        }
+                    }
+                }
+
 
                 /*
                 echo "<pre>";

@@ -12,6 +12,20 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// mail chimp connection
+
+$mailchimp = new \MailchimpMarketing\ApiClient();
+
+$mailchimp->setConfig([
+    'apiKey' => '8d310a609170d90d95a141bde4b8c2ae-us1',
+    'server' => 'us1'
+]);
+
+$response = $mailchimp->ping->get();
+//print_r($response);
+
+
+
 //Create an instance of the Base Class
 $f3 = Base::instance();
 $f3->set('DEBUG', 3);

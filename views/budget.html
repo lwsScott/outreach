@@ -19,42 +19,64 @@
 <div class="container">
     <h3>Weekly Tasks</h3>
 
-    <form action="#" method="post" class="form-inline" id="addBudget">
-        <div class="form-group pl-5">
-            <div class="row">
+    <div class="row">
+        <form action="#" method="post" class="form-inline col-4 p-2" id="addBudget">
+            <div class="form-group pl-5">
                 <label for="budget">Weekly Budget:&nbsp&nbsp</label>
                 <input type="text" class="form-control mr-2" id="budget" name="budget">
                 <button type="submit" class="btn btn-primary">Set Budget</button>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+
+    <div class="row">
+        <form action="#" method="post" class="form-inline col-4 p-2" id="addThrift">
+            <div class="form-group pl-5">
+                <input type="number" class="form-control mr-2 hidden" value="1" id="thrift" name="thrift">
+                <button type="submit" class="btn btn-primary">Issue Thrift</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <form action="#" method="post" class="form-inline col-4 p-2">
+            <div class="form-group pl-5">
+                <input type="number" class="form-control mr-2 hidden" name="resetThrift">
+                <button type="submit" class="btn btn-primary">Reset Thrift</button>
+            </div>
+        </form>
+    </div>
 
     <hr>
 
     <table class="table table-bordered table-responsive" id="budgeted">
         <thead class="thead-light">
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Total</th>
-                <th scope="col">Remaining</th>
-            </tr>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Total</th>
+            <th scope="col">Remaining</th>
+            <th scope="col">Thrift Vouchers</th>
+        </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">Budget</th>
-                <td>{{ @budget }}</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">Estimated</th>
-                <td>{{ @estimates }}</td>
-                <td>{{ @budgetMinusEstimates }}</td>
-            </tr>
-            <tr>
-                <th scope="row">Paid</th>
-                <td>{{ @paid }}</td>
-                <td>{{ @budgetMinusPaid }}</td>
-            </tr>
+        <tr>
+            <th scope="row">Budget</th>
+            <td>{{ @budget }}</td>
+            <td></td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <th scope="row">Estimated</th>
+            <td>{{ @estimates }}</td>
+            <td>{{ @budgetMinusEstimates }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">Paid/Issued</th>
+            <td>{{ @paid }}</td>
+            <td>{{ @budgetMinusPaid }}</td>
+            <td>{{ @thriftVouchers }}</td>
+        </tr>
         </tbody>
     </table>
 
