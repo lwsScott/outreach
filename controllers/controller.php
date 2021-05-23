@@ -502,65 +502,65 @@ class Controller
                 $list_id = "fb67dfc029";
                 $subscriber_hash = md5(strtolower($email));
 
-                $mailchimp = new \MailchimpMarketing\ApiClient();
+                if ($email != '') {
+                    require_once $_SERVER['DOCUMENT_ROOT'] . "/../config.php";
+                    $mailchimp = new \MailchimpMarketing\ApiClient();
 
-                $mailchimp->setConfig([
-                    'apiKey' => '8d310a609170d90d95a141bde4b8c2ae-us1',
-                    'server' => 'us1'
-                ]);
-
-                try {
-                    $response = $mailchimp->lists->addListMember($list_id, [
-                        "email_address" => "$email",
-                        "status" => "subscribed",
-                        "merge_fields" => [
-                            "FNAME" => "$firstName",
-                            "LNAME" => "$lastName"
-                        ]
+                    $mailchimp->setConfig([
+                        'apiKey' => DB_API,
+                        'server' => 'us1'
                     ]);
-                    print_r($response);
-                } catch (MailchimpMarketing\ApiException $e) {
-                    echo $e->getMessage();
-                }
 
-                // tag the guest as an Outreach Guest
-                try {
-                    $mailchimp->lists->updateListMemberTags($list_id, $subscriber_hash, [
-                        "tags" => [
-                            [
-                                "name" => "Outreach Guest",
-                                "status" => "active"
+                    try {
+                        $response = $mailchimp->lists->addListMember($list_id, [
+                            "email_address" => "$email",
+                            "status" => "subscribed",
+                            "merge_fields" => [
+                                "FNAME" => "$firstName",
+                                "LNAME" => "$lastName"
                             ]
-                        ]
-                    ]);
+                        ]);
+                        print_r($response);
+                    } catch (MailchimpMarketing\ApiException $e) {
+                        echo $e->getMessage();
+                    }
 
-                    echo "The return type for this endpoint is null";
-                } catch (MailchimpMarketing\ApiException $e) {
-                    echo $e->getMessage();
-                }
-
-                // tag the guest as a Thrift Shop User if applicable
-                foreach ($resource as  $item)
-                {
-                    if ($item == "thriftshop")
-                    {
-                        try {
-                            $mailchimp->lists->updateListMemberTags($list_id, $subscriber_hash, [
-                                "tags" => [
-                                    [
-                                        "name" => "Thrift Shop User",
-                                        "status" => "active"
-                                    ]
+                    // tag the guest as an Outreach Guest
+                    try {
+                        $mailchimp->lists->updateListMemberTags($list_id, $subscriber_hash, [
+                            "tags" => [
+                                [
+                                    "name" => "Outreach Guest",
+                                    "status" => "active"
                                 ]
-                            ]);
+                            ]
+                        ]);
 
-                            echo "The return type for this endpoint is null";
-                        } catch (MailchimpMarketing\ApiException $e) {
-                            echo $e->getMessage();
+                        echo "The return type for this endpoint is null";
+                    } catch (MailchimpMarketing\ApiException $e) {
+                        echo $e->getMessage();
+                    }
+
+                    // tag the guest as a Thrift Shop User if applicable
+                    foreach ($resource as $item) {
+                        if ($item == "thriftshop") {
+                            try {
+                                $mailchimp->lists->updateListMemberTags($list_id, $subscriber_hash, [
+                                    "tags" => [
+                                        [
+                                            "name" => "Thrift Shop User",
+                                            "status" => "active"
+                                        ]
+                                    ]
+                                ]);
+
+                                echo "The return type for this endpoint is null";
+                            } catch (MailchimpMarketing\ApiException $e) {
+                                echo $e->getMessage();
+                            }
                         }
                     }
                 }
-
 
                 /*
                 echo "<pre>";
@@ -583,8 +583,8 @@ class Controller
         }
         $template = new Template();
         echo $template->render('views/newGuest.html');
-    }
 
+    }
     public function clientId($f3, $params)
     {
         if(empty($_SESSION['username']))
