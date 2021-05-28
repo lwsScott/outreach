@@ -83,5 +83,4 @@ class Budget
         $this->_budgetUsed = $budgetUsed;
     }
 
-
 }

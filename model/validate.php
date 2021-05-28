@@ -3,7 +3,7 @@
  * Validation Class for dating website
  * provides validation functions
  * 5/30/20
- * filename https://lscott.greenriverdev.com/328/dating/model/validate.php
+ * filename https://lscott.greenriverdev.com/outreach/model/validate.php
  * @author Lewis Scott
  * @version 1.0
  */
@@ -39,6 +39,4 @@ class Validate
         }
         return true;
     }
-
-
 }

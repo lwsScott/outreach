@@ -29,23 +29,6 @@ function formSubmit()
 
 	$name = "";
 
-	// $members.on({
-	// 	// after selecting field
-	// 	click : function() {
-	// 		$numMembers = $("#members option:selected").text();
-	// 		showHouseholdMembers($numMembers);
-	// 	}
-	// });
-	//
-	// $vouchers.on({
-	// 	// after selecting field
-	// 	click : function() {
-	// 		$numVouchers = $("#vouchernum option:selected").text();
-	// 		console.log($numVouchers);
-	// 		showAmountOfVouchers($numVouchers);
-	// 	}
-	// });
-
 	$preview.on({
 		// after selecting field
 		click : function() {
@@ -71,29 +54,7 @@ function formSubmit()
 			$previewForm.append("<p>Driver License or Photo ID #: " + $("#license").val() + "</p>");
 			$previewForm.append("<p>Puget Sound Energy Account #: " + $("#pse").val() + "</p>");
 			$previewForm.append("<p>Water Account #: " + $("#water").val() + "</p>");
-			// $previewForm.append("<p>Members in household: " + $numMembers + "</p>");
-			// $("#previewForm p:even").css({"float": "left", "width": "50%"});
-			// for(var i = 1; i <= $numMembers; i++)
-			// {
-			// 	$previewForm.append("<div style=\"float:left; width:50%;\"><p>Name: " + $("#name" + i).val() + "</p>");
-			// 	$previewForm.append("<p>Age: " + $("#age" + i).val() + "</p><style>");
-			// 	$previewForm.append("<p>Gender: " + $("#gender" + i).val() + "</p></div.");
-			// }
-			// for(var j = 1; j <= $numVouchers; j++)
-			// {
-			// 	$previewForm.append("<div style=\"float:left; width:50%;\"><p>Voucher: " + $("#voucherNum" + j).val() + "</p>");
-			// 	$previewForm.append("<p>Check: " + $("#checkNum" + j).val() + "</p><style>");
-			// 	$previewForm.append("<p>Amount: " + $("#amount" + j).val() + "</p></div.");
-			// 	$previewForm.append("<p>Resource needed: " + $("#resource" + j).val() + "</p></div.");
-			// }
-            //
-			// /*
-			// $text = "<div>";
-			// 	$text += "<p>Something</p>";
-			// $text += "</div>";
-            //
-			// $("#someDiv").append($text);
-			// */
+
 		}
 	});
 

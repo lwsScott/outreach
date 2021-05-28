@@ -8,6 +8,10 @@
 
 $regex = "/^[a-zA-Z]+[a-zA-Z '-]*[a-zA-Z]+$/";
 
+/**
+ * @param $name
+ * @return bool|false|int
+ */
 function validName($name) {
     if(empty($name)){
         return false;
@@ -15,6 +19,10 @@ function validName($name) {
     return preg_match("/^[a-zA-Z]+[a-zA-Z '-]*[a-zA-Z ']+$/", $name);
 }
 
+/**
+ * @param $date
+ * @return bool
+ */
 function validBirth($date) {
     if(empty($date)) {
         return true;
@@ -31,6 +39,10 @@ function validBirth($date) {
     return checkdate($dateExploded[0], $dateExploded[1], $dateExploded[2]);
 }
 
+/**
+ * @param $phone
+ * @return bool
+ */
 function validPhone($phone) {
     if(empty($phone)){
         return true;
@@ -40,6 +52,10 @@ function validPhone($phone) {
     }
 }
 
+/**
+ * @param $zip
+ * @return bool
+ */
 function validZip($zip){
     if(empty($zip)){
         return true;
@@ -47,22 +63,42 @@ function validZip($zip){
     return (strlen($zip) == 5) && (is_numeric($zip));
 }
 
+/**
+ * @param $income
+ * @return bool
+ */
 function validIncome($income){
     return empty($income) || is_numeric($income);
 }
 
+/**
+ * @param $rent
+ * @return bool
+ */
 function validRent($rent){
     return empty($rent) || is_numeric($rent);
 }
 
+/**
+ * @param $stamps
+ * @return bool
+ */
 function validfoodstamps($stamps){
     return empty($stamps) || is_numeric($stamps);
 }
 
+/**
+ * @param $gender
+ * @return bool
+ */
 function validGender($gender){
     return isset($gender);
 }
 
+/**
+ * @param $support
+ * @return bool
+ */
 function validAddSupport($support){
     return empty($support) || is_numeric($support);
 }

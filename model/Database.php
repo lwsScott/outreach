@@ -5,68 +5,9 @@
  * Date: 3/9/2018
  * Time: 11:31 AM
  */
-/*
- * CREATE TABLE IF NOT EXISTS `Guests` (
-  `ClientId` INT NOT NULL AUTO_INCREMENT,
-  `first` VARCHAR(45) NOT NULL,
-  `last` VARCHAR(45) NOT NULL,
-  `birthdate` VARCHAR(45) NOT NULL,
-  `phone` VARCHAR(11) NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `ethnicity` VARCHAR(20) NULL,
-  `street` VARCHAR(45) NULL,
-  `city` VARCHAR(45) NULL,
-  `zip` VARCHAR(5) NULL,
-  `license` VARCHAR(15) NULL,
-  `pse` VARCHAR(15) NULL,
-  `water` VARCHAR(15) NULL,
-  `income` FLOAT(8,2) NULL,
-  `rent` FLOAT(8,2) NULL,
-  `foodStamp` FLOAT(8,2) NULL,
-  `addSupport` FLOAT(8,2) NULL,
-  `mental` VARCHAR(1) NULL,
-  `physical` VARCHAR(1) NULL,
-  `veteran` VARCHAR(1) NULL,
-  `homeless` VARCHAR(1) NULL,
-  `notes` TEXT NULL,
-  PRIMARY KEY (`ClientId`))
-;
-CREATE TABLE IF NOT EXISTS `Household` (
-  `HouseholdId` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  `age` INT(3) NULL,
-  `gender` VARCHAR(6) NOT NULL,
-  `Guests_ClientId` INT NOT NULL,
-PRIMARY KEY (`HouseId`),
-  INDEX `fk_Household_Guests1_idx` (`Guests_ClientId` ASC),
-  CONSTRAINT `fk_Household_Guests1`
-    FOREIGN KEY (`Guests_ClientId`)
-    REFERENCES `Guests` (`ClientId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-;
-CREATE TABLE IF NOT EXISTS `Needs` (
-   `NeedsId` INT NOT NULL AUTO_INCREMENT,
-  `resource` VARCHAR(50) NULL,
-  `visitDate` DATE NULL,
-  `amount` FLOAT(10,2) NULL,
-  `voucher` VARCHAR(15) NULL,
-  `checkNum` VARCHAR(15) NULL,
-  `Guests_ClientId` INT NOT NULL,
-PRIMARY KEY (`NeedsId`),
-  INDEX `fk_Needs_Guests1_idx` (`Guests_ClientId` ASC),
-  CONSTRAINT `fk_Needs_Guests1`
-    FOREIGN KEY (`Guests_ClientId`)
-    REFERENCES `Guests` (`ClientId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-;
- */
+
 require_once $_SERVER['DOCUMENT_ROOT']."/../config.php";
 
-//echo DB_DSN;
-//echo DB_USERNAME;
-//echo DB_PASSWORD;
 /**
  * Class Database, preforms sql statements to insert/delete/update/view
  */
@@ -117,7 +58,6 @@ class Database
      */
     function insertGuest($first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license, $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $senior, $veteran, $homeless, $notes, $flag)
     {
-        //global $dbh;
         //1. Define the query
         $sql= "INSERT INTO Guests (first, last, birthdate, phone, email, ethnicity, street, city, zip, license, pse, water, income, rent, foodStamp, addSupport, mental, physical, senior, veteran, homeless, notes, flag)
 						VALUES (:first, :last,:birthdate, :phone, :email, :ethnicity, :street, :city, :zip, :license, :pse, :water, :income, :rent, :foodStamp, :addSupport, :mental, :physical, :senior, :veteran, :homeless, :notes, :flag)";
@@ -153,8 +93,8 @@ class Database
         //4. Execute the query
         $statement->execute();
         $this->setLastId($this->dbh->lastInsertId());
-        //echo $this->dbh->lastInsertId();
     }
+
     /**
      * getter for all the guests in the database
      * @return array of guests
@@ -202,6 +142,7 @@ class Database
         // Process the result
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for all the needs in the database
      * @return array of needs
@@ -217,6 +158,7 @@ class Database
         // Process the result
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for a single guest to edit
      * @param $id, the guest id
@@ -267,6 +209,7 @@ class Database
         // Process the result
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
+
     /**
      * insert new into the household table/database
      * @param $name
@@ -283,6 +226,7 @@ class Database
         $statement->bindParam(':gender', $gender, PDO::PARAM_STR);
         $statement->execute();
     }
+
     /**
      * setter for the last id
      * @param $id
@@ -290,6 +234,7 @@ class Database
     function setLastId($id){
         $this->id = $id;
     }
+
     /**
      * getter for the last id
      * @return int id
@@ -297,6 +242,7 @@ class Database
     function getLastId(){
         return $this->id;
     }
+
     /**
      * insert new needs into the database
      * @param $resource
@@ -316,6 +262,7 @@ class Database
         $statement->bindParam(':date', $date, PDO::PARAM_STR);
         $statement->execute();
     }
+
     /**
      * getter for the households database table
      * @return array of household
@@ -331,6 +278,12 @@ class Database
         // Process the result
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Get the user needs for a guest
+     * @param $id the client id
+     * @return array the needs
+     */
     function getUserNeeds($id){
         $sql = "SELECT * FROM `Needs` WHERE `Guests_ClientId` = $id";
         $statement = $this->dbh->prepare($sql);
@@ -339,6 +292,12 @@ class Database
         // Process the result
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * get the household members for a guest
+     * @param $id the guest id
+     * @return array the members
+     */
     function getUserHousehold($id){
         $sql = "SELECT * FROM `Household` WHERE `Guests_ClientId` = $id";
         $statement = $this->dbh->prepare($sql);
@@ -347,6 +306,7 @@ class Database
         // Process the result
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * edit needs, replaces the data if the exists, inserts if new
      * @param $id
@@ -466,6 +426,7 @@ class Database
         //4. Execute the query
         $statement->execute();
     }
+
     /**
      * getter method for thrift values
      * @param $start
@@ -487,6 +448,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the gas values
      * @param $start
@@ -508,6 +470,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the water values
      * @param $start
@@ -529,6 +492,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the energy values
      * @param $start
@@ -550,6 +514,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the food values
      * @param $start
@@ -571,6 +536,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the dol values
      * @param $start
@@ -592,6 +558,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the other values
      * @param $start
@@ -635,6 +602,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter fo the total values
      * @param $start
@@ -655,6 +623,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * returns user by the username
      * @param $username
@@ -703,6 +672,12 @@ class Database
     }
 
     // make a temporary route to run this to add new users to the database
+
+    /**
+     * @param $username
+     * @param $password
+     * @return bool
+     */
     function newUser($username, $password) {
         $password = sha1($password);
         $dbh = $this->dbh;
@@ -768,6 +743,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the gender information
      * @return array
@@ -798,6 +774,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the zip data
      * @return array
@@ -833,6 +810,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the disabilities data
      * @return array
@@ -859,6 +837,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the veterans data
      * @return array
@@ -879,6 +858,7 @@ class Database
         //echo"<pre>";var_dump($row);echo"</pre>";
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
     /**
      * getter for the veterans data
      * @return array
@@ -938,9 +918,11 @@ class Database
         //echo $id;
     }
 
-    /*
-    * The user's tasks
-    */
+
+    /**
+     * Return the user's tasks
+     * @return array the tasks
+     */
     function getTasks()
     {
         $taskArchived = 0;
@@ -954,9 +936,11 @@ class Database
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /*
-    * Delete task
-    */
+
+    /**
+     * Archive a task
+     * @param $taskId the task id
+     */
     function deleteTask($taskId)
     {
         //1. Define the query
@@ -974,9 +958,12 @@ class Database
 
     }
 
-    /*
-* UPdate task
-*/
+
+    /**
+     * Update a task to set amount paid
+     * @param $taskId the task id
+     * @param $paid the amount
+     */
     function updateTask($taskId, $paid)
     {
         //1. Define the query
@@ -993,10 +980,8 @@ class Database
     }
 
     /**
-     * Inserts strategy into the database
-     * @param $tactic the tactic to add
-     * @param $chooseTactic which tactic to add
-     * @param $change the update or add
+     * Update the budget amount
+     * @param $budget the amount
      */
     function addBudget($budget)
     {
@@ -1017,6 +1002,9 @@ class Database
         //echo $id;
     }
 
+    /**
+     * @return mixed
+     */
     function getBudget()
     {
         //1. Define the query
@@ -1111,6 +1099,9 @@ class Database
         $statement->execute();
     }
 
+    /**
+     * @return mixed
+     */
     function getThriftVouchers()
     {
         //1. Define the query

@@ -194,5 +194,5 @@ p.text-warning
 
 .hidden {
     visibility: hidden;
-    display: none;
+    display: none !important;
 }

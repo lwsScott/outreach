@@ -23,6 +23,10 @@ class Controller
         $this->_validator = $validator;
     }
 
+    /**
+     * Logout the user
+     * @param $f3
+     */
     public function logout($f3)
     {
         //unsets the session variables
@@ -30,6 +34,10 @@ class Controller
         $f3->reroute('/');
     }
 
+    /**
+     * View Intake form requests
+     * @param $f3
+     */
     public function requests($f3)
     {
         //if logged in
@@ -48,12 +56,14 @@ class Controller
 
         $f3->set('requests', $requests);
 
-        //var_dump($requests);
-
         $template = new Template();
         echo $template->render('views/requests.html');
     }
 
+    /**
+     * View Budget page with tasks and budget
+     * @param $f3
+     */
     public function budget($f3)
     {
         //if logged in
@@ -86,7 +96,6 @@ class Controller
                 $valid = false;
             }
             if (isset($_POST['resource'])) {
-                //$assistance = implode(", ", $_POST['assistance']);
                 $resourceType = implode(", ", $_POST['resource']);
             } else {
                 $valid = false;
@@ -150,7 +159,6 @@ class Controller
             if (isset($_POST['thrift'])) {
                 $database->updateThriftVouchers();
 
-
                 $thriftVouchers = $database->getThriftVouchers();
                 $f3->set('thriftVouchers', $thriftVouchers);
             }
@@ -164,13 +172,7 @@ class Controller
                 $f3->set('thriftVouchers', $thriftVouchers);
             }
 
-
             $_POST = array();
-            //$f3->reroute("tactical");
-            //header ('Location: ' . $_SERVER['REQUEST_URI']);
-
-            //$view = new Template();
-            //echo $view->render('views/tactical.html');
         }
         unset($_POST);
         $_POST = array();
@@ -193,12 +195,19 @@ class Controller
         $f3->set('budgetMinusPaid', $bmp);
 
         $result = $database->getTasks();
-        $this->_f3->set('result', $result);
+        $f3->set('result', $result);
+
+        $thriftVouchers = $database->getThriftVouchers();
+        $f3->set('thriftVouchers', $thriftVouchers);
 
         $template = new Template();
         echo $template->render('views/budget.html');
     }
 
+    /**
+     * Log the user in
+     * @param $f3
+     */
     public function login($f3)
     {
         $database = new Database();
@@ -207,7 +216,7 @@ class Controller
         {
             $username = $_POST['username'];
             $password = $_POST['password'];
-            //echo $username; echo $password;
+
             //checks the database if the credentials are correct
             $user = $database->getUser($username,$password);
             //returns 1 if correct, and nothing if incorrect
@@ -224,6 +233,10 @@ class Controller
         echo $template->render('views/login.html');
     }
 
+    /**
+     * View the home page
+     * @param $f3
+     */
     public function home($f3)
     {
         //if logged in
@@ -270,6 +283,10 @@ class Controller
         echo $template->render('views/home.html');
     }
 
+    /**
+     * View Reports page
+     * @param $f3
+     */
     public function reports($f3)
     {
         //if logged in
@@ -325,6 +342,11 @@ class Controller
         echo $template->render('views/reports.html');
     }
 
+    /**
+     * Add a new Guest
+     * No fields are required fields
+     * @param $f3
+     */
     public function newGuest($f3)
     {
         //if logged in
@@ -402,7 +424,6 @@ class Controller
             $f3->set('water', $water);
             $f3->set('notes', $notes);
             $f3->set('flag', $flag);
-
 
             $mainVouch = array();
             for($i = 0; $i < sizeof($voucher);$i++){
@@ -520,7 +541,6 @@ class Controller
                                 "LNAME" => "$lastName"
                             ]
                         ]);
-                        print_r($response);
                     } catch (MailchimpMarketing\ApiException $e) {
                         echo $e->getMessage();
                     }
@@ -562,12 +582,6 @@ class Controller
                     }
                 }
 
-                /*
-                echo "<pre>";
-                    var_dump($mainVouch);
-                echo "</pre>";
-                */
-
                 if(!empty($mainVouch)){
                     for($i = 0; $i < sizeof($mainVouch);$i++){
                         $database->insertNeeds($mainVouch[$i][4],$mainVouch[$i][3], $mainVouch[$i][2],$mainVouch[$i][0],$mainVouch[$i][1]);
@@ -585,6 +599,13 @@ class Controller
         echo $template->render('views/newGuest.html');
 
     }
+
+    /**
+     * View a Guest
+     * @param $f3
+     * @param $params the client id
+     * @throws Exception
+     */
     public function clientId($f3, $params)
     {
         if(empty($_SESSION['username']))
@@ -607,24 +628,8 @@ class Controller
             }
         }
         $resources = getResources();
-        /*
-        function getEligibleDates($mainVouch)
-        {
-            for ($x = 0; $x < sizeof($mainVouch); $x++) {
 
-                if ($guestMap[$resource] === null) {
-                    $guestMap[$resource] = $mainVouch[$x][3];
-                } else {
-                    if ($guestMap[$resource] < $mainVouch[$x][3]) {
-                        $guestMap[$resource] = $mainVouch[$x][3];
-                    }
-                }
-            }
-        }
-            $guestMap = array_map('getEligibleDates', $resources);
-
-            $f3->set('guestMap', $guestMap);
-        */
+        // set the eligibility dates for each type of voucher
         for($x = 0; $x < sizeof($mainVouch);$x++) {
 
             if (($mainVouch[$x][4]) == "thriftshop") {
@@ -664,7 +669,6 @@ class Controller
                 $f3->set('Food', $date);
             }
         }
-
 
         //sort vouchers by date
         function compareOrder($a, $b)
@@ -715,7 +719,6 @@ class Controller
         $f3->set('members', $mainMem);
         $f3->set('flag', $guest['flag']);
 
-        //WORKS UP UNTIL THIS POINT
 
         if (isset($_POST['submit'])) {
             $firstName = $_POST['first'];
@@ -872,6 +875,12 @@ class Controller
         echo $template->render('views/newGuest.html');
     }
 
+    /**
+     * View the new Guest form with a potential client
+     * from the View Requests page
+     * @param $f3
+     * @param $params the client to add
+     */
     public function requestId($f3, $params)
     {
         if(empty($_SESSION['username']))
@@ -919,31 +928,13 @@ class Controller
         $f3->set('helpList', $guest['HelpList']);
         $f3->set('firstName', $guest['FirstName']);
         $f3->set('lastName', $guest['LastName']);
-        //$f3->set('birthdate', $guest['birthdate']);
         $f3->set('phone', $guest['Phone']);
         $f3->set('email', $guest['Email']);
-        //$f3->set('ethnicity', $guest['ethnicity']);
         $f3->set('street', $guest['Address']);
         $f3->set('city', $guest['City']);
         $f3->set('zip', $guest['Zip']);
-        //$f3->set('license', $guest['license']);
-        //$f3->set('pse', $guest['pse']);
-        //$f3->set('water', $guest['water']);
-        //$f3->set('income', $guest['income']);
-        //$f3->set('rent', $guest['rent']);
-        //$f3->set('foodStamp', $guest['foodStamp']);
-        //$f3->set('addSupport', $guest['addSupport']);
-        //$f3->set('mental', $guest['mental']);
-        //$f3->set('physical', $guest['physical']);
-        //$f3->set('senior', $guest['senior']);
-        //$f3->set('veteran', $guest['veteran']);
-        //$f3->set('homeless', $guest['homeless']);
-        //$f3->set('members', $guest['members']);
-        //$f3->set('notes', $guest['notes']);
-        $f3->set('vouchers', $mainVouch);
-        // $f3->set('members', $mainMem);
 
-        //WORKS UP UNTIL THIS POINT
+        $f3->set('vouchers', $mainVouch);
 
         if (isset($_POST['submit'])) {
             $firstName = $_POST['first'];
@@ -1076,13 +1067,7 @@ class Controller
                 $guest->setNotes($notes);
                 $guest->setFlag($flag);
                 $database = new Database();
-                /*
-                $database->editGuest($id,$guest->getFirstName(),$guest->getLastName(),$guest->getBirthdate(),$guest->getPhone(),
-                    $guest->getEmail(),$guest->getEthnicity(),$guest->getStreet(),$guest->getCity(),$guest->getZip(),
-                    $guest->getLicense(),$guest->getPse(),$guest->getWater(),$guest->getIncome(),$guest->getRent(),
-                    $guest->getFoodStamp(),$guest->getAdditionalSupport(),$guest->getMental(),$guest->getPhysical(), $guest->getSenior(),
-                    $guest->getVeteran(),$guest->getHomeless(),$guest->getNotes());
-                */
+
                 //insert the guest into the database
                 $database->insertGuest($guest->getFirstName(),$guest->getLastName(),$guest->getBirthdate(),$guest->getPhone(),
                     $guest->getEmail(),$guest->getEthnicity(),$guest->getStreet(),$guest->getCity(),$guest->getZip(),
@@ -1112,6 +1097,10 @@ class Controller
         echo $template->render('views/newGuest.html');
     }
 
+    /**
+     * Provide Reports on demographics
+     * @param $f3
+     */
     public function demographics($f3)
     {
         if(empty($_SESSION['username']))
@@ -1137,6 +1126,10 @@ class Controller
         echo $template->render('views/demographics.html');
     }
 
+    /**
+     * Change the password for the outreach administrator
+     * @param $f3
+     */
     public function profile($f3)
     {
         if(empty($_SESSION['username']))
@@ -1179,58 +1172,4 @@ class Controller
         echo $template->render('views/profile.html');
     }
 
-    /**
-     * @param $f3
-     * @param $firstName
-     * @param $lastName
-     * @param $birthdate
-     * @param string $phone
-     * @param $email
-     * @param $ethnicity
-     * @param $street
-     * @param $city
-     * @param $zip
-     * @param $mental
-     * @param $physical
-     * @param $senior
-     * @param $veteran
-     * @param $homeless
-     * @param $income
-     * @param $rent
-     * @param $foodStamp
-     * @param $addSupport
-     * @param $license
-     * @param $pse
-     * @param $water
-     * @param $notes
-     */
-    public function setHiveVariables($f3, $firstName, $lastName, $birthdate, string $phone, $email,
-                     $ethnicity, $street, $city, $zip, $mental, $physical, $senior, $veteran, $homeless,
-                     $income, $rent, $foodStamp, $addSupport, $license, $pse, $water, $notes, $flag)
-    {
-        $f3->set('firstName', $firstName);
-        $f3->set('lastName', $lastName);
-        $f3->set('birthdate', $birthdate);
-        $f3->set('phone', $phone);
-        $f3->set('email', $email);
-        $f3->set('ethnicity', $ethnicity);
-        $f3->set('street', $street);
-        $f3->set('city', $city);
-        $f3->set('zip', $zip);
-        $f3->set('mental', $mental);
-        $f3->set('physical', $physical);
-        $f3->set('senior', $senior);
-        $f3->set('veteran', $veteran);
-        $f3->set('homeless', $homeless);
-        $f3->set('income', $income);
-        $f3->set('rent', $rent);
-        $f3->set('foodStamp', $foodStamp);
-        $f3->set('addSupport', $addSupport);
-        $f3->set('license', $license);
-        $f3->set('pse', $pse);
-        $f3->set('water', $water);
-        $f3->set('notes', $notes);
-        $f3->set('flag', $flag);
-
-    }
 }

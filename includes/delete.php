@@ -17,7 +17,6 @@ if (isset($_GET['recordId'])) {
 
     // if delete works, redirect page back to control page
     if ($result) {
-        //echo '<script>window.location.href="../control.php";</script>';
         echo '<script>window.location.href="../home";</script>';
     }
 }

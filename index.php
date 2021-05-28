@@ -71,10 +71,12 @@ $f3->route('GET /demographics', function($f3) {
     $GLOBALS['controller']->demographics($f3);
 });
 
+// reset the password route
 $f3->route('GET|POST /profile', function($f3) {
     $GLOBALS['controller']->profile($f3);
 });
 
+// budget page route
 $f3->route('GET|POST /budget', function($f3) {
     $GLOBALS['controller']->budget($f3);
 });
