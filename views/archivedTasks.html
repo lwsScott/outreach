@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+    <link type="text/css" rel="stylesheet" href="styles/home.css">
+    <style>
+
+    </style>
+    <title>Budget</title>
+</head>
+<body>
+<include href="views/header.html"></include>
+<div class="container">
+    <h3>Archived Tasks</h3>
+
+    <div class="container">
+        <table class="table table-bordered table-responsive table-striped table-hover" id="table1">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Client Name</th>
+                <th scope="col">Resource</th>
+                <th scope="col">Estimated</th>
+                <th scope="col">Paid</th>
+                <th class="hidden"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <check if="{{ isset(@result) }}" >
+                <repeat group="{{ @result }}" value="{{ @row }}">
+                    <tr>
+                        <td><check if="{{ isset(@row) }}" >
+                            {{ $row['taskDate'] }} </check></td>
+                        <td><check if="{{ isset(@row) }}" >
+                            {{ $row['taskTime'] }}</check> </td>
+                        <td><check if="{{ isset(@row) }}" >
+                            {{ $row['clientName'] }} </check></td>
+                        <td><check if="{{ isset(@row) }}">
+                            {{ $row['resourceType'] }}</check> </td>
+                        <td><check if="{{ isset(@row) }}">
+                            {{ $row['taskAmount'] }}</check> </td>
+                        <td><check if="{{ isset(@row) }}">
+                            {{ $row['paid'] }}</check></td>
+                        <td class="hidden"><check if="{{ isset(@row) }}">
+                            {{ $row['taskID'] }}</check></td>
+                    </tr>
+                </repeat>
+            </check>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+<script src="js/budget.js"></script>
+
+</body>
+</html>

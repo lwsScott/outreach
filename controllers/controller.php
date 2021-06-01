@@ -205,6 +205,30 @@ class Controller
     }
 
     /**
+     * View Archived task page with tasks
+     * @param $f3
+     */
+    public function archived($f3)
+    {
+        //if logged in
+        if(empty($_SESSION['username']))
+        {
+            $f3->reroute('/');
+        }
+        // date format change
+        $dateToday = date("m/d/Y");
+        $f3->set('dateToday',$dateToday);
+
+        $database = new Database();
+
+        $result = $database->getArchivedTasks();
+        $f3->set('result', $result);
+
+        $template = new Template();
+        echo $template->render('views/archivedTasks.html');
+    }
+
+    /**
      * Log the user in
      * @param $f3
      */

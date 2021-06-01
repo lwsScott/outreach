@@ -936,6 +936,22 @@ class Database
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Return the user's tasks
+     * @return array the tasks
+     */
+    function getArchivedTasks()
+    {
+        $taskArchived = 1;
+        // Define the query
+        $sql = "SELECT * FROM tasks WHERE archived = $taskArchived";
+        // Prepare the statement
+        $statement = $this->dbh->prepare($sql);
+        // Execute the statement
+        $statement->execute();
+        // Process the result
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     /**
      * Archive a task
