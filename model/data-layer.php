@@ -6,8 +6,8 @@
  */
 function getEthnicities()
 {
-    $ethnicities = array('African (Native)','African American','Asian','Caucasian','Eskimo',
-        'Latinx','Mixed','Native','Pacific Islander','Other','Prefer not to answer' );
+    $ethnicities = array('African (Native)','African American','Asian','Indigenous',
+        'Latinx','Pacific Islander','White', 'Mixed','Other','Prefer not to answer' );
     return $ethnicities;
 }
 
