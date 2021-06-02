@@ -697,8 +697,8 @@ class Database
     function getEthnicity()
     {
         // Define the query
-        $sql = "select 'White' as Label, count(ethnicity) as Value from Guests 
-					where ethnicity= 'white' AND hidden != 'y'
+        $sql = "select 'Caucasian' as Label, count(ethnicity) as Value from Guests 
+					where ethnicity= 'caucasian' AND hidden != 'y'
 					union (
 					select 'African (Native)' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'african (native)' AND hidden != 'y')
@@ -706,17 +706,26 @@ class Database
 					select 'African American' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'african american' AND hidden != 'y')
 					union (
-					select 'Latinx' as Label, count(ethnicity) as Value from Guests 
+					select 'LatinX' as Label, count(ethnicity) as Value from Guests 
+					where ethnicity= 'hispanic' AND hidden != 'y')
+                    union (
+					select 'LatinX' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'latinx' AND hidden != 'y')
 					union (
-					select 'Indigenous' as Label, count(ethnicity) as Value from Guests 
-					where ethnicity= 'indigenous' AND hidden != 'y')
+					select 'Native' as Label, count(ethnicity) as Value from Guests 
+					where ethnicity= 'native' AND hidden != 'y')
 					union (
 					select 'Asian' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'asian' AND hidden != 'y')
 					union (
 					select 'Pacific Islander' as Label, count(ethnicity) as Value from Guests 
+					where ethnicity= 'pacific' AND hidden != 'y')
+                    union (
+					select 'Pacific Islander' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'pacific islander' AND hidden != 'y')
+					union (
+					select 'Eskimo' as Label, count(ethnicity) as Value from Guests 
+					where ethnicity= 'eskimo'AND hidden != 'y' )
 					union (
 					select 'Mixed' as Label, count(ethnicity) as Value from Guests 
 					where ethnicity= 'mixed' AND hidden != 'y')
@@ -1038,7 +1047,7 @@ class Database
     function getEstimates()
     {
         //1. Define the query
-        $sql = "SELECT SUM(taskAmount) AS value_sum FROM tasks";
+        $sql = "SELECT SUM(taskAmount) AS value_sum FROM tasks WHERE archived = 0";
 
         //2. Prepare the statement
         $statement = $this->dbh->prepare($sql);
@@ -1058,7 +1067,7 @@ class Database
     function getPaid()
     {
         //1. Define the query
-        $sql = "SELECT SUM(paid) AS value_sum FROM tasks";
+        $sql = "SELECT SUM(paid) AS value_sum FROM tasks WHERE archived = 0";
 
         //2. Prepare the statement
         $statement = $this->dbh->prepare($sql);

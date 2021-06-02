@@ -540,7 +540,7 @@ class Controller
 
                 $lastId = $database->getLastId();
                 $f3->set('lastId', $lastId);
-
+/*
                 // add the guest to the mailing list
                 // set the Audience ID for the mailing list to add to
                 // this comes from the mailchimp settings
@@ -605,7 +605,7 @@ class Controller
                         }
                     }
                 }
-
+*/
                 if(!empty($mainVouch)){
                     for($i = 0; $i < sizeof($mainVouch);$i++){
                         $database->insertNeeds($mainVouch[$i][4],$mainVouch[$i][3], $mainVouch[$i][2],$mainVouch[$i][0],$mainVouch[$i][1]);
@@ -820,6 +820,7 @@ class Controller
             }
 
             $mainMem = array();
+            var_dump($name);
             for($i = 0; $i < sizeof($name); $i++){
                 if(!empty($name[$i])) {
                     $temp = array();
@@ -916,8 +917,9 @@ class Controller
         $guest = $database->getRequestDetails($id);
         $mainVouch = array();
         $mainMem = array();
-        $tempVouch = $database->getUserNeeds($id);
-        $tempMem = $database->getUserHousehold($id);
+        //$tempVouch = $database->getUserNeeds($id);
+        //$tempMem = $database->getUserHousehold($id);
+        /*
         for($x = 0; $x < sizeof($tempVouch);$x++){
             if(!empty($tempVouch[$x])) {
                 $temp = array();
@@ -925,15 +927,14 @@ class Controller
                 array_push($mainVouch,$temp);
             }
         }
-
-
+        */
         //sort vouchers by date
         function compareOrder($a, $b)
         {
             return strnatcmp($a[3], $b[3]);
         }
         usort($mainVouch, 'compareOrder');
-
+        /*
         for($x = 0; $x < sizeof($tempMem);$x++){
             if(!empty($tempMem[$x])) {
                 $temp = array();
@@ -941,6 +942,7 @@ class Controller
                 array_push($mainMem,$temp);
             }
         }
+        */
 
         // convert phone format for display
         $dbPhone = $guest['phone'];
