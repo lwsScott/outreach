@@ -134,7 +134,7 @@ class Database
     function getRequests()
     {
         // Define the query
-        $sql = "SELECT * FROM outreach_form ";
+        $sql = "SELECT * FROM outreach_form WHERE completed = 0";
         // Prepare the statement
         $statement = $this->dbh->prepare($sql);
         // Execute the statement

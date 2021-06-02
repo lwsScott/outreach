@@ -61,46 +61,41 @@
         <table id="guestInfoRequest" class="table display table-hover">
             <thead>
             <tr>
-                <th>Complete</th>
-                <th>Prior</th>
                 <th>Date</th>
+                <th>Prior Help</th>
+                <th>Duplicate Name</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Phone</th>
                 <th>E-mail</th>
-                <th>Duplicate Name</th>
             </tr>
             </thead>
             <tbody>
             <repeat group="{{ @requests}}" value="{{ @request }}">
                     <tr class="clickableRow" data-href="{{ @BASE }}/request/{{@request['id']}}">
-                        <td><check if="{{ @request['completed'] == 1 }}">
-                        <true>Yes</true>
-                        <false>No</false>
-                        </check></td>
-                        <td>{{@request['PriorHelp']}}</td>
                         <td>{{@request['date']}}</td>
-                        <td>{{@request['FirstName']}} </td>
-                        <td>{{@request['LastName']}}</td>
-                        <td>{{@request['Phone']}}</td>
-                        <td>{{@request['Email']}}</td>
+                        <td>{{@request['PriorHelp']}}</td>
                         <td><check if="{{ @request['ClientId'] != 0 }}">
                             <true>Yes</true>
                             <false>No</false>
                         </check></td>
+                        <td>{{@request['FirstName']}} </td>
+                        <td>{{@request['LastName']}}</td>
+                        <td>{{@request['Phone']}}</td>
+                        <td>{{@request['Email']}}</td>
+
                     </tr>
             </repeat>
             </tbody>
             <tfoot>
             <tr>
-                <th>Complete</th>
-                <th>Prior</th>
                 <th>Date</th>
+                <th>Prior Help</th>
+                <th>Duplicate Name</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Phone</th>
                 <th>E-mail</th>
-                <th>Duplicate Name</th>
             </tr>
             </tfoot>
         </table> <!-- Main Table -->
