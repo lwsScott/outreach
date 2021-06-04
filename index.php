@@ -9,12 +9,12 @@
 require_once('vendor/autoload.php');
 require_once 'model/data-layer.php';
 
+
+session_start();
 // server should keep session data for AT LEAST 8 hours
 ini_set('session.gc_maxlifetime', 28800);
 // each client should remember their session id for EXACTLY 8 hours
 session_set_cookie_params(28800);
-session_start();
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 

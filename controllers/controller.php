@@ -540,7 +540,8 @@ class Controller
 
                 $lastId = $database->getLastId();
                 $f3->set('lastId', $lastId);
-/*
+
+                /*
                 // add the guest to the mailing list
                 // set the Audience ID for the mailing list to add to
                 // this comes from the mailchimp settings
@@ -1108,12 +1109,12 @@ class Controller
 
                 if(!empty($mainVouch)){
                     for($i = 0; $i < sizeof($mainVouch);$i++){
-                        $database->editNeeds($mainVouch[$i][5], $id, $mainVouch[$i][4],$mainVouch[$i][3],$mainVouch[$i][2],$mainVouch[$i][0],$mainVouch[$i][1]);
+                        $database->insertNeeds($mainVouch[$i][4],$mainVouch[$i][3], $mainVouch[$i][2],$mainVouch[$i][0],$mainVouch[$i][1]);
                     }
                 }
-                if(!empty($mainMem)){
-                    for($i = 0; $i < sizeof($mainMem); $i++){
-                        $database->editHousehold($mainMem[$i][3], $id, $mainMem[$i][0], $mainMem[$i][1], $mainMem[$i][2]);
+                if(!empty($mainMem)) {
+                    for ($i = 0; $i < sizeof($mainMem); $i++) {
+                        $database->insertHousehold($mainMem[$i][0], $mainMem[$i][1], $mainMem[$i][2]);
                     }
                 }
                 $f3->reroute('/home');

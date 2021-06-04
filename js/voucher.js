@@ -57,7 +57,7 @@ $('#add-voucher-button').click(function(event) {
         '<option value="gas">Gas</option> \n' +
         '<option value="rent">Rent</option> \n' +
         '<option value="thriftshop">Thrift Shop</option> \n' +
-        '<option value="waterbill">Water</option> \n' +
+        '<option value="water">Water</option> \n' +
         '<option value="other">Other</option> \n' +
         '</select> \n' +
         '</div>  \n' +
